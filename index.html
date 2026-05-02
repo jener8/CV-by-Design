@@ -42,18 +42,50 @@
     font-family: 'Playfair Display', serif;
     font-size: 1.15rem; color: var(--ink); text-decoration: none; letter-spacing: -0.01em;
   }
-  .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
+  .nav-links { display: flex; gap: 1.5rem; list-style: none; align-items: center; }
   .nav-links a {
-    font-size: 0.82rem; color: var(--muted); text-decoration: none;
+    font-size: 0.78rem; color: var(--muted); text-decoration: none;
     font-weight: 400; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s;
   }
   .nav-links a:hover { color: var(--ink); }
+  .nav-hide { }
+  .nav-email {
+    color: var(--ink) !important; border: 1px solid var(--border);
+    padding: 0.4rem 0.85rem !important; border-radius: 3px;
+    letter-spacing: 0.01em !important; text-transform: none !important;
+    font-size: 0.78rem !important; white-space: nowrap;
+  }
   .nav-cta {
     background: var(--ink) !important; color: var(--paper) !important;
-    padding: 0.55rem 1.4rem; border-radius: 3px; font-weight: 500 !important;
-    letter-spacing: 0.02em !important; text-transform: none !important; transition: background 0.2s !important;
+    padding: 0.5rem 1.1rem; border-radius: 3px; font-weight: 500 !important;
+    letter-spacing: 0.02em !important; text-transform: none !important;
+    transition: background 0.2s !important; white-space: nowrap;
   }
   .nav-cta:hover { background: var(--pink) !important; }
+  .nav-hide { }
+  @media (max-width: 860px) { .nav-hide { display: none !important; } }
+  .hamburger {
+    display: none; flex-direction: column; gap: 5px; cursor: pointer;
+    background: none; border: none; padding: 4px; margin-left: auto;
+  }
+  .hamburger span { display: block; width: 22px; height: 2px; background: var(--ink); border-radius: 2px; transition: 0.2s; }
+  .mobile-menu {
+    position: absolute; top: 100%; left: 0; right: 0;
+    background: var(--paper); border-bottom: 1px solid var(--border);
+    padding: 0.5rem 2rem 1rem; flex-direction: column; z-index: 200;
+    display: none;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    font-size: 0.88rem; color: var(--muted); text-decoration: none;
+    padding: 0.85rem 0; border-bottom: 1px solid var(--border);
+    font-weight: 400; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s;
+  }
+  .mobile-menu a:last-child { border-bottom: none; }
+  .mobile-menu a:hover { color: var(--ink); }
+  @media (max-width: 1100px) {
+    .nav-hide { display: none !important; }
+  }
 
   .hero {
     min-height: 88vh; display: grid; grid-template-columns: 55% 45%; position: relative;
@@ -289,22 +321,38 @@
     footer { padding: 1.5rem 2rem; flex-direction: column; text-align: center; gap: 0.75rem; }
     .footer-links { justify-content: center; }
   }
+
+  .nav-hide { }
+  @media (max-width: 860px) { .nav-hide { display: none !important; } }
+  .hamburger { display: flex; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+  .hamburger span { display: block; width: 22px; height: 2px; background: var(--ink); border-radius: 2px; }
+  .mobile-menu { position: absolute; top: 100%; left: 0; right: 0; background: var(--paper); border-bottom: 1px solid var(--border); padding: 0.5rem 2rem 1rem; flex-direction: column; z-index: 200; display: none; }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a { font-size: 0.88rem; color: var(--muted); text-decoration: none; padding: 0.85rem 0; border-bottom: 1px solid var(--border); font-weight: 400; text-transform: uppercase; letter-spacing: 0.04em; }
+  .mobile-menu a:last-child { border-bottom: none; }
+  @media (min-width: 900px) {
+    #nav-d1, #nav-d2, #nav-d3, #nav-d4 { display: list-item !important; }
+  }
 </style>
 </head>
 <body>
 
-<nav>
+<nav style="position:relative;">
   <a class="nav-logo" href="#">CV by Design</a>
   <ul class="nav-links">
-    <li><a href="#who">Who it's for</a></li>
-    <li><a href="#process">The process</a></li>
-    <li><a href="#ai">About the AI</a></li>
-    <li><a href="#pricing">Pricing</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="./coaches-landing.html">For coaches</a></li>
-    <li><a href="mailto:info@jennifersimonds.com" style="color:var(--ink);border:1px solid var(--border);padding:0.45rem 1rem;border-radius:3px;letter-spacing:0.01em !important;text-transform:none !important;">✉ info@jennifersimonds.com</a></li>
-    <li><a href="https://cvresume-vqtg.vercel.app/" target="_blank" class="nav-cta">Open the tool →</a></li>
+    <li><a href="./coaches-landing.html" style="color:var(--pink);font-weight:500;text-transform:none;letter-spacing:0.01em;">For coaches</a></li>
+    <li><a href="mailto:info@jennifersimonds.com" style="color:var(--ink);border:1px solid var(--border);padding:0.4rem 0.85rem;border-radius:3px;letter-spacing:0.01em;text-transform:none;font-size:0.78rem;white-space:nowrap;">✉ info@jennifersimonds.com</a></li>
+    <li><a href="https://tool.cv-by-design.com/" target="_blank" class="nav-cta">Open the tool →</a></li>
+    <li><button class="hamburger" onclick="document.getElementById('mobile-nav').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button></li>
   </ul>
+  <div class="mobile-menu" id="mobile-nav">
+    <a href="#who" onclick="document.getElementById('mobile-nav').classList.remove('open')">Who it's for</a>
+    <a href="#process" onclick="document.getElementById('mobile-nav').classList.remove('open')">The process</a>
+    <a href="#ai" onclick="document.getElementById('mobile-nav').classList.remove('open')">About the AI</a>
+    <a href="#pricing" onclick="document.getElementById('mobile-nav').classList.remove('open')">Pricing</a>
+    <a href="#about" onclick="document.getElementById('mobile-nav').classList.remove('open')">About</a>
+    <a href="mailto:info@jennifersimonds.com">✉ info@jennifersimonds.com</a>
+  </div>
 </nav>
 
 <!-- HERO -->
@@ -320,7 +368,7 @@
       built around you, not the other way around.
     </p>
     <div class="hero-actions">
-      <a href="https://cvresume-vqtg.vercel.app/" target="_blank" class="btn-primary">Try the CV tool →</a>
+      <a href="https://tool.cv-by-design.com/" target="_blank" class="btn-primary">Try the CV tool →</a>
       <a href="#process" class="btn-ghost">See how it works</a>
     </div>
   </div>
@@ -514,6 +562,62 @@
   <p class="pricing-footnote">Prices can always be discussed — reach out and we'll find an arrangement that works for where you are in your search.</p>
 </section>
 
+<!-- CV SHOWCASE -->
+<section style="background:#111210;padding:6rem 5rem;overflow:hidden;position:relative;">
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 60% 0%, rgba(240,212,74,0.07) 0%, transparent 55%), radial-gradient(ellipse at 20% 100%, rgba(232,96,138,0.05) 0%, transparent 50%);pointer-events:none;"></div>
+
+  <div style="position:relative;z-index:2;text-align:center;margin-bottom:3.5rem;">
+    <div style="display:inline-flex;align-items:center;gap:0.6rem;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:100px;padding:0.4rem 1.1rem;margin-bottom:2rem;">
+      <span style="font-size:0.72rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:#aaaaaa;">Multiple CV formats</span>
+    </div>
+    <h2 style="font-family:'Playfair Display',serif;font-size:clamp(2.2rem,4vw,3.5rem);line-height:1.1;letter-spacing:-0.02em;color:white;margin-bottom:0.6rem;">
+      One profile.
+    </h2>
+    <h2 style="font-family:'Playfair Display',serif;font-size:clamp(2.2rem,4vw,3.5rem);line-height:1.1;letter-spacing:-0.02em;color:var(--yellow);margin-bottom:1.5rem;font-style:italic;">
+      Multiple powerful CVs.
+    </h2>
+    <p style="font-size:1rem;color:#cccccc;max-width:480px;margin:0 auto 2.5rem;line-height:1.7;font-weight:300;">
+      The tool generates polished, tailored CVs in minutes — different formats for different roles, all from a single profile built with your coach.
+    </p>
+
+    <div style="display:flex;justify-content:center;flex-wrap:wrap;gap:2rem;margin-bottom:3.5rem;">
+      <div style="display:flex;align-items:center;gap:0.5rem;font-size:0.82rem;color:#aaaaaa;">
+        <span style="color:var(--yellow);">✦</span> ATS-friendly layouts
+      </div>
+      <div style="display:flex;align-items:center;gap:0.5rem;font-size:0.82rem;color:#aaaaaa;">
+        <span style="color:var(--pink);">✦</span> Modern professional designs
+      </div>
+      <div style="display:flex;align-items:center;gap:0.5rem;font-size:0.82rem;color:#aaaaaa;">
+        <span style="color:var(--cyan);">✦</span> Built in minutes
+      </div>
+      <div style="display:flex;align-items:center;gap:0.5rem;font-size:0.82rem;color:#aaaaaa;">
+        <span style="color:var(--yellow);">✦</span> Fully tailored to you
+      </div>
+    </div>
+  </div>
+
+  <div style="position:relative;z-index:2;max-width:900px;margin:0 auto;">
+    <div style="border-radius:12px;overflow:hidden;box-shadow:0 40px 80px rgba(0,0,0,0.5),0 0 0 1px rgba(255,255,255,0.06);">
+      <img src="./cvimage.png" alt="CV template examples generated by the tool" style="width:100%;display:block;" />
+    </div>
+  </div>
+
+  <div style="position:relative;z-index:2;display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:900px;margin:3rem auto 0;">
+    <div style="padding:1.5rem;border:1px solid rgba(255,255,255,0.12);border-radius:6px;background:#1a1f1e;">
+      <div style="font-size:0.75rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:#3dcfb8;margin-bottom:0.6rem;">Professional layouts</div>
+      <p style="font-size:0.82rem;color:#cccccc;line-height:1.65;">Stand out with modern, employer-ready CV designs that reflect your seniority.</p>
+    </div>
+    <div style="padding:1.5rem;border:1px solid rgba(255,255,255,0.12);border-radius:6px;background:#1a1f1e;">
+      <div style="font-size:0.75rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:#f0d44a;margin-bottom:0.6rem;">Quick & easy</div>
+      <p style="font-size:0.82rem;color:#cccccc;line-height:1.65;">Create and customise a tailored CV in minutes — then apply more, stress less.</p>
+    </div>
+    <div style="padding:1.5rem;border:1px solid rgba(255,255,255,0.12);border-radius:6px;background:#1a1f1e;">
+      <div style="font-size:0.75rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:#e8608a;margin-bottom:0.6rem;">Made for you</div>
+      <p style="font-size:0.82rem;color:#cccccc;line-height:1.65;">Tailored to highlight your specific strengths, experience, and the role you're targeting.</p>
+    </div>
+  </div>
+</section>
+
 <!-- ABOUT -->
 <section class="section" id="about" style="background:var(--surface);border-top:1px solid var(--border);">
   <div class="about-wrap">
@@ -575,7 +679,7 @@
     <p>Including a CV builder <mark style="background:var(--ink);color:var(--yellow);padding:0 0.2em;border-radius:2px;font-weight:500;">proved to be successful.</mark> Try it directly, or get in touch to talk through what combination of coaching and tools makes sense for where you are right now.</p>
   </div>
   <div class="cta-actions">
-    <a href="https://cvresume-vqtg.vercel.app/" target="_blank" class="btn-dark">Open the CV tool →</a>
+    <a href="https://tool.cv-by-design.com/" target="_blank" class="btn-dark">Open the CV tool →</a>
     <a href="mailto:info@jennifersimonds.com" style="display:inline-flex;align-items:center;gap:0.5rem;background:white;color:var(--ink);font-size:0.95rem;font-weight:500;padding:0.85rem 1.75rem;border-radius:3px;text-decoration:none;transition:background 0.2s;border:1.5px solid rgba(17,18,16,0.15);">
       ✉ info@jennifersimonds.com
     </a>
@@ -587,7 +691,7 @@
   <ul class="footer-links">
     <li><a href="https://jennifersimonds.com" target="_blank">Portfolio</a></li>
     <li><a href="./coaches-landing.html">For coaches</a></li>
-    <li><a href="https://cvresume-vqtg.vercel.app/" target="_blank">CV Tool</a></li>
+    <li><a href="https://tool.cv-by-design.com/" target="_blank">CV Tool</a></li>
     <li><a href="mailto:info@jennifersimonds.com">Contact</a></li>
     <li><a href="./imprint.html">Imprint</a></li>
   </ul>
