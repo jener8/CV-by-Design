@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CV by Design — Career Coaching & AI Resume Tool</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Instrument+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --ink: #111210;
+    --paper: #f7f5f0;
+    --white: #ffffff;
+    --yellow: #f0d44a;
+    --pink: #e8608a;
+    --cyan: #3dcfb8;
+    --muted: #7a786e;
+    --muted-light: #a8a69e;
+    --border: #e2ddd6;
+    --surface: #f0ede6;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Instrument Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.65;
+    overflow-x: hidden;
+  }
+
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(247,245,240,0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    padding: 1.1rem 3rem;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem; color: var(--ink); text-decoration: none; letter-spacing: -0.01em;
+  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
+  .nav-links a {
+    font-size: 0.82rem; color: var(--muted); text-decoration: none;
+    font-weight: 400; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-cta {
+    background: var(--ink) !important; color: var(--paper) !important;
+    padding: 0.55rem 1.4rem; border-radius: 3px; font-weight: 500 !important;
+    letter-spacing: 0.02em !important; text-transform: none !important; transition: background 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--pink) !important; }
+
+  .hero {
+    min-height: 88vh; display: grid; grid-template-columns: 55% 45%; position: relative;
+  }
+  .hero-left {
+    padding: 7rem 4rem 7rem 5rem; display: flex; flex-direction: column; justify-content: center;
+    border-right: 1px solid var(--border);
+  }
+  .hero-kicker {
+    font-size: 0.75rem; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase;
+    color: var(--muted-light); margin-bottom: 2rem;
+  }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.8rem, 4.5vw, 4.2rem); line-height: 1.08; color: var(--ink);
+    margin-bottom: 2rem; letter-spacing: -0.02em;
+  }
+  .hero-title em { font-style: italic; color: var(--pink); }
+  .hero-body {
+    font-size: 1.05rem; color: var(--muted); max-width: 460px; margin-bottom: 3rem;
+    line-height: 1.75; font-weight: 300;
+  }
+  .hero-actions { display: flex; gap: 1.25rem; align-items: center; }
+  .btn-primary {
+    background: var(--ink); color: var(--paper); padding: 0.9rem 2.25rem; border-radius: 3px;
+    font-size: 0.9rem; font-weight: 500; text-decoration: none; transition: background 0.2s, transform 0.15s;
+    letter-spacing: 0.02em; display: inline-flex; align-items: center; gap: 0.5rem;
+  }
+  .btn-primary:hover { background: var(--pink); transform: translateY(-1px); }
+  .btn-ghost {
+    color: var(--muted); font-size: 0.85rem; text-decoration: none;
+    border-bottom: 1px solid var(--border); padding-bottom: 1px; transition: color 0.2s, border-color 0.2s;
+  }
+  .btn-ghost:hover { color: var(--ink); border-color: var(--ink); }
+
+  .hero-right {
+    background: var(--ink); display: flex; flex-direction: column;
+    justify-content: flex-end; padding: 3.5rem; position: relative; overflow: hidden;
+  }
+  .hero-right-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 70% 30%, rgba(240,212,74,0.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 20% 80%, rgba(232,96,138,0.06) 0%, transparent 50%);
+  }
+  .hero-photo-block {
+    position: relative; z-index: 2; margin-bottom: 3rem;
+    display: flex; align-items: center; gap: 1.5rem;
+  }
+  .hero-photo {
+    width: 90px; height: 90px; border-radius: 50%; object-fit: cover;
+    border: 2px solid rgba(255,255,255,0.15); flex-shrink: 0;
+  }
+  .hero-intro-name {
+    font-family: 'Playfair Display', serif; font-size: 1.2rem; color: white;
+    font-weight: 400; margin-bottom: 0.25rem;
+  }
+  .hero-intro-role { font-size: 0.8rem; color: rgba(255,255,255,0.4); font-weight: 300; line-height: 1.5; }
+
+  .hero-divider { height: 1px; background: rgba(255,255,255,0.1); margin-bottom: 2.5rem; position: relative; z-index: 2; }
+
+  .proof-row { position: relative; z-index: 2; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .proof-number {
+    font-family: 'Playfair Display', serif; font-size: 2.2rem; color: var(--yellow);
+    line-height: 1; margin-bottom: 0.4rem;
+  }
+  .proof-label { font-size: 0.78rem; color: rgba(255,255,255,0.4); line-height: 1.55; font-weight: 300; }
+
+  .section { padding: 6rem 5rem; }
+
+  .section-kicker {
+    font-size: 0.74rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--muted-light); margin-bottom: 1rem;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3vw, 2.6rem); line-height: 1.15; letter-spacing: -0.02em;
+    max-width: 640px; margin-bottom: 3.5rem; color: var(--ink);
+  }
+
+  .audience-section { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .audience-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 0;
+    border: 1px solid var(--border); border-radius: 6px; overflow: hidden;
+  }
+  .audience-card {
+    padding: 2rem 1.75rem; border-right: 1px solid var(--border); background: var(--white);
+  }
+  .audience-card:last-child { border-right: none; }
+  .audience-icon {
+    width: 36px; height: 36px; border-radius: 50%; margin-bottom: 1.25rem;
+    display: flex; align-items: center; justify-content: center; font-size: 0.9rem; font-weight: 500;
+  }
+  .audience-card h3 { font-size: 0.95rem; font-weight: 500; margin-bottom: 0.5rem; color: var(--ink); }
+  .audience-card p { font-size: 0.82rem; color: var(--muted); line-height: 1.65; }
+
+  .process-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .process-card {
+    padding: 2.5rem; border: 1px solid var(--border); border-radius: 6px;
+    background: var(--white); position: relative;
+  }
+  .process-num { font-size: 0.78rem; color: var(--muted-light); letter-spacing: 0.08em; margin-bottom: 1.5rem; }
+  .process-card h3 { font-size: 1.05rem; font-weight: 500; margin-bottom: 0.65rem; color: var(--ink); }
+  .process-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.7; }
+  .process-dot { position: absolute; top: 2rem; right: 2rem; width: 8px; height: 8px; border-radius: 50%; }
+
+  .ai-section { background: var(--ink); color: white; }
+  .ai-section .section-kicker { color: var(--cyan); }
+  .ai-section .section-title { color: white; margin-bottom: 2.5rem; }
+  .ai-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+  .ai-left p { font-size: 0.95rem; color: rgba(255,255,255,0.55); line-height: 1.8; font-weight: 300; margin-bottom: 1.25rem; }
+  .ai-left p strong { color: rgba(255,255,255,0.85); font-weight: 500; }
+  .ai-facts { display: flex; flex-direction: column; gap: 1rem; }
+  .ai-fact {
+    padding: 1.4rem 1.75rem; border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 6px; display: flex; gap: 1.25rem; align-items: flex-start;
+  }
+  .ai-fact-marker { width: 6px; height: 6px; border-radius: 50%; margin-top: 7px; flex-shrink: 0; }
+  .ai-fact-text h4 { font-size: 0.88rem; font-weight: 500; color: rgba(255,255,255,0.85); margin-bottom: 0.3rem; }
+  .ai-fact-text p { font-size: 0.82rem; color: rgba(255,255,255,0.45); line-height: 1.6; }
+
+  .pricing-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem; }
+  .price-card {
+    border: 1px solid var(--border); border-radius: 6px; padding: 2.5rem 2rem;
+    background: var(--white); transition: box-shadow 0.2s, transform 0.2s;
+  }
+  .price-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.07); transform: translateY(-3px); }
+  .price-card.featured { background: var(--ink); border-color: var(--ink); color: white; }
+  .price-tag {
+    font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--muted-light); margin-bottom: 1.5rem;
+  }
+  .price-card.featured .price-tag { color: var(--yellow); }
+  .price-amount {
+    font-family: 'Playfair Display', serif; font-size: 2.8rem; line-height: 1;
+    color: var(--ink); margin-bottom: 0.3rem; letter-spacing: -0.02em;
+  }
+  .price-card.featured .price-amount { color: white; }
+  .price-period { font-size: 0.8rem; color: var(--muted-light); margin-bottom: 2rem; font-weight: 300; }
+  .price-card.featured .price-period { color: rgba(255,255,255,0.4); }
+  .price-line { height: 1px; background: var(--border); margin-bottom: 1.75rem; }
+  .price-card.featured .price-line { background: rgba(255,255,255,0.1); }
+  .price-list { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; font-size: 0.85rem; color: var(--muted); }
+  .price-card.featured .price-list { color: rgba(255,255,255,0.6); }
+  .price-list li { display: flex; gap: 0.6rem; align-items: flex-start; line-height: 1.5; }
+  .price-list li::before { content: '–'; color: var(--pink); flex-shrink: 0; font-weight: 500; }
+  .price-card.featured .price-list li::before { color: var(--yellow); }
+  .pricing-footnote {
+    font-size: 0.82rem; color: var(--muted); text-align: center; padding: 1.25rem;
+    border: 1px solid var(--border); border-radius: 6px; background: var(--surface);
+  }
+
+  .about-wrap { display: grid; grid-template-columns: 380px 1fr; gap: 6rem; align-items: start; }
+  .about-photo-col { position: sticky; top: 6rem; }
+  .about-photo-frame { position: relative; }
+  .about-photo-main { width: 100%; border-radius: 6px; display: block; object-fit: cover; aspect-ratio: 3/4; }
+  .about-photo-badge {
+    position: absolute; bottom: 1.5rem; left: 1.5rem; right: 1.5rem;
+    background: rgba(17,18,16,0.88); backdrop-filter: blur(6px);
+    border-radius: 4px; padding: 1.1rem 1.25rem;
+    display: flex; flex-direction: column; gap: 0.2rem;
+  }
+  .about-photo-badge strong { color: white; font-size: 1rem; font-weight: 500; }
+  .about-photo-badge span { color: rgba(255,255,255,0.45); font-size: 0.78rem; font-weight: 300; }
+  .about-content .section-title { margin-bottom: 0; }
+  .about-text { margin: 2rem 0 2.5rem; display: flex; flex-direction: column; gap: 1.25rem; }
+  .about-text p { font-size: 0.95rem; color: var(--muted); line-height: 1.8; font-weight: 300; }
+  .about-text p strong { color: var(--ink); font-weight: 500; }
+  .credentials { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .cred {
+    font-size: 0.78rem; padding: 0.35rem 0.9rem; border-radius: 100px;
+    border: 1px solid var(--border); color: var(--muted); background: var(--white);
+  }
+
+  .safety-bar {
+    background: var(--surface); border-top: 1px solid var(--border);
+    padding: 2rem 5rem; display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap;
+  }
+  .safety-icon {
+    width: 36px; height: 36px; border-radius: 50%; background: var(--white);
+    border: 1px solid var(--border); display: flex; align-items: center; justify-content: center;
+    font-size: 0.9rem; flex-shrink: 0;
+  }
+  .safety-text strong { display: block; font-size: 0.85rem; font-weight: 500; color: var(--ink); margin-bottom: 0.15rem; }
+  .safety-text p { font-size: 0.8rem; color: var(--muted); }
+  .safety-divider { width: 1px; height: 40px; background: var(--border); }
+
+  .cta-section {
+    background: var(--yellow); padding: 6rem 5rem;
+    display: grid; grid-template-columns: 1fr auto; gap: 4rem; align-items: center;
+  }
+  .cta-text h2 {
+    font-family: 'Playfair Display', serif; font-size: clamp(2rem, 3.5vw, 2.8rem);
+    letter-spacing: -0.02em; color: var(--ink); line-height: 1.15; margin-bottom: 0.75rem;
+  }
+  .cta-text p { font-size: 0.95rem; color: rgba(17,18,16,0.6); max-width: 480px; line-height: 1.7; font-weight: 300; }
+  .cta-actions { display: flex; flex-direction: column; gap: 0.75rem; align-items: flex-end; flex-shrink: 0; }
+  .btn-dark {
+    background: var(--ink); color: var(--paper); padding: 1rem 2.25rem; border-radius: 3px;
+    font-size: 0.9rem; font-weight: 500; text-decoration: none; white-space: nowrap;
+    transition: background 0.2s; letter-spacing: 0.02em; display: inline-block;
+  }
+  .btn-dark:hover { background: #2d2c28; }
+  .cta-note { font-size: 0.78rem; color: rgba(17,18,16,0.45); }
+
+  footer {
+    background: var(--ink); padding: 2rem 5rem;
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+  }
+  .footer-logo { font-family: 'Playfair Display', serif; color: rgba(255,255,255,0.6); font-size: 1rem; text-decoration: none; }
+  .footer-links { display: flex; gap: 2rem; list-style: none; }
+  .footer-links a { font-size: 0.78rem; color: rgba(255,255,255,0.3); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: rgba(255,255,255,0.7); }
+  .footer-copy { font-size: 0.75rem; color: rgba(255,255,255,0.25); }
+
+  @media (max-width: 1000px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links li:not(:last-child) { display: none; }
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-left { padding: 4rem 2rem; border-right: none; }
+    .hero-right { padding: 3rem 2rem; min-height: 380px; }
+    .section { padding: 4rem 2rem; }
+    .audience-grid { grid-template-columns: 1fr 1fr; }
+    .audience-card:nth-child(2) { border-right: none; }
+    .process-grid { grid-template-columns: 1fr; }
+    .ai-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    .pricing-row { grid-template-columns: 1fr; }
+    .about-wrap { grid-template-columns: 1fr; gap: 2.5rem; }
+    .about-photo-col { position: static; }
+    .about-photo-main { aspect-ratio: 4/3; }
+    .cta-section { grid-template-columns: 1fr; padding: 4rem 2rem; }
+    .cta-actions { align-items: flex-start; }
+    .safety-bar { padding: 2rem; gap: 1rem; }
+    footer { padding: 1.5rem 2rem; flex-direction: column; text-align: center; gap: 0.75rem; }
+    .footer-links { justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#">CV by Design</a>
+  <ul class="nav-links">
+    <li><a href="#who">Who it's for</a></li>
+    <li><a href="#process">The process</a></li>
+    <li><a href="#ai">About the AI</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="./coaches-landing.html">For coaches</a></li>
+    <li><a href="mailto:info@jennifersimonds.com" style="color:var(--ink);border:1px solid var(--border);padding:0.45rem 1rem;border-radius:3px;letter-spacing:0.01em !important;text-transform:none !important;">✉ info@jennifersimonds.com</a></li>
+    <li><a href="https://cvresume-vqtg.vercel.app/" target="_blank" class="nav-cta">Open the tool →</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" style="padding: 0;">
+  <div class="hero-left">
+    <p class="hero-kicker">Career Coaching · Personal AI Tools for Job Hunting · Berlin</p>
+    <h1 class="hero-title">
+      Individual coaching<br>and personal AI tools<br>for <em>job hunting.</em>
+    </h1>
+    <p class="hero-body">
+      Including a CV builder <mark style="background:var(--yellow);color:var(--ink);padding:0 0.2em;border-radius:2px;font-weight:500;">proved to be successful.</mark> Senior professionals across every industry —
+      stop spending weeks on applications that don't land. Expert coaching combined with AI tools
+      built around you, not the other way around.
+    </p>
+    <div class="hero-actions">
+      <a href="https://cvresume-vqtg.vercel.app/" target="_blank" class="btn-primary">Try the CV tool →</a>
+      <a href="#process" class="btn-ghost">See how it works</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-right-bg"></div>
+    <div class="hero-photo-block">
+      <img src="./jenny-photo.png" alt="Jennifer Simonds" class="hero-photo" />
+      <div>
+        <div class="hero-intro-name">Jennifer Simonds</div>
+        <div class="hero-intro-role">UX & AI Design Leader · Career Coach<br>Berlin · English & German</div>
+      </div>
+    </div>
+    <div class="hero-divider"></div>
+    <div class="proof-row">
+      <div>
+        <div class="proof-number">1 in 5</div>
+        <div class="proof-label">resumes built this way lead to an interview — validated through real client outcomes and user testing</div>
+      </div>
+      <div>
+        <div class="proof-number" style="color: var(--pink);">Minutes</div>
+        <div class="proof-label">to a polished, tailored CV — freeing your time for conversations that matter</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHO IT'S FOR -->
+<section class="section audience-section" id="who">
+  <p class="section-kicker">Who this is for</p>
+  <h2 class="section-title">Made for professionals ready to make a deliberate move</h2>
+  <div class="audience-grid">
+    <div class="audience-card">
+      <div class="audience-icon" style="background:#fff8e6;color:#b8860b;">→</div>
+      <h3>Changing industries</h3>
+      <p>You have real experience and transferable expertise, but your CV still reads like your last job title. Let's reframe your story for where you're going.</p>
+    </div>
+    <div class="audience-card">
+      <div class="audience-icon" style="background:#f5eaf5;color:#8b3a8b;">↑</div>
+      <h3>Moving up</h3>
+      <p>You're ready for a more senior or leadership role. Your CV needs to make the case — not just list what you've done.</p>
+    </div>
+    <div class="audience-card">
+      <div class="audience-icon" style="background:#eaf5f0;color:#2d7a56;">⟳</div>
+      <h3>Returning to the market</h3>
+      <p>After a break, a redundancy, or a pivot. Your experience is still real — it just needs to be positioned with confidence.</p>
+    </div>
+    <div class="audience-card">
+      <div class="audience-icon" style="background:#eaf0f8;color:#2b5ea7;">◇</div>
+      <h3>Going independent</h3>
+      <p>Building a portfolio career or consultancy. You need a document that communicates depth and breadth without a single job title to anchor it.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="section" id="process">
+  <p class="section-kicker">The process</p>
+  <h2 class="section-title">Strategy first. Tool second. You decide when it's ready.</h2>
+  <div class="process-grid">
+    <div class="process-card">
+      <div class="process-dot" style="background:var(--yellow);"></div>
+      <p class="process-num">Step 01</p>
+      <h3>We start with the role, not the document</h3>
+      <p>In a coaching session we clarify what you actually want, who you're targeting, and what your CV needs to communicate. The tool makes building fast — this session makes it strategic.</p>
+    </div>
+    <div class="process-card">
+      <div class="process-dot" style="background:var(--pink);"></div>
+      <p class="process-num">Step 02</p>
+      <h3>The AI tool builds a strong first draft</h3>
+      <p>Access a purpose-built AI resume builder, configured and adapted to your profile and needs. Within minutes you have a structured, polished document — tailored to you, not a generic template.</p>
+    </div>
+    <div class="process-card">
+      <div class="process-dot" style="background:var(--cyan);"></div>
+      <p class="process-num">Step 03</p>
+      <h3>We refine it together</h3>
+      <p>You review, I give feedback. We adjust tone, emphasis, and positioning until it reflects you accurately and compellingly. This is where human judgement matters most.</p>
+    </div>
+    <div class="process-card" style="background:var(--surface);">
+      <div class="process-dot" style="background:var(--muted-light);"></div>
+      <p class="process-num">Ongoing</p>
+      <h3>Iterate as your search evolves</h3>
+      <p>Applying to different roles or sectors? The tool lets you generate tailored versions quickly. Coaching stays available for the questions, pivots, and decisions that come up.</p>
+    </div>
+  </div>
+</section>
+
+<!-- AI TRANSPARENCY -->
+<section class="section ai-section" id="ai">
+  <div class="ai-grid">
+    <div>
+      <p class="section-kicker">About the AI tool</p>
+      <h2 class="section-title">Honest about what it is and how it works</h2>
+      <div class="ai-left">
+        <p>The CV tool is <strong>AI-powered, purpose-built, and still evolving.</strong> I want to be upfront about that. It was built through an iterative, hands-on process — shaped by real client needs, real job searches, and direct feedback on what actually helps versus what just sounds impressive.</p>
+        <p>That means it gets better over time. New client profiles, new industries, and new use cases all inform how it is configured and improved. <strong>It is not a finished product — it is a working tool</strong> that I actively develop and adapt alongside the people who use it.</p>
+        <p>I use it myself. I test it. I update it. And I pair it with coaching because the tool alone, like all AI, works best when a thoughtful human is directing it.</p>
+      </div>
+    </div>
+    <div class="ai-facts">
+      <div class="ai-fact">
+        <div class="ai-fact-marker" style="background:var(--cyan);"></div>
+        <div class="ai-fact-text">
+          <h4>Transparent about AI involvement</h4>
+          <p>The tool uses AI to generate resume content. I don't present this as magic — it is a guided, structured process. You are always in control of what goes into the final document.</p>
+        </div>
+      </div>
+      <div class="ai-fact">
+        <div class="ai-fact-marker" style="background:var(--yellow);"></div>
+        <div class="ai-fact-text">
+          <h4>Actively maintained and improving</h4>
+          <p>The tool is iterated based on what I learn from each client. Different industries, seniority levels, and search strategies all feed back into how it is configured and refined.</p>
+        </div>
+      </div>
+      <div class="ai-fact">
+        <div class="ai-fact-marker" style="background:var(--pink);"></div>
+        <div class="ai-fact-text">
+          <h4>Your data stays yours</h4>
+          <p>Everything you put into the tool is private and secure. It is never shared, used to train external models, or accessible to anyone other than you and me during our work together.</p>
+        </div>
+      </div>
+      <div class="ai-fact">
+        <div class="ai-fact-marker" style="background:rgba(255,255,255,0.25);"></div>
+        <div class="ai-fact-text">
+          <h4>Human judgement is always part of the process</h4>
+          <p>AI writes fast but doesn't understand your career the way you do. Coaching ensures the output is genuinely yours — accurate, compelling, and not just plausible-sounding text.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section" id="pricing">
+  <p class="section-kicker">Pricing</p>
+  <h2 class="section-title">Clear, flexible options</h2>
+
+  <div style="background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:1.5rem 2rem;margin-bottom:2rem;display:flex;gap:1.25rem;align-items:flex-start;">
+    <div style="width:8px;height:8px;border-radius:50%;background:var(--cyan);margin-top:6px;flex-shrink:0;"></div>
+    <div>
+      <p style="font-size:0.88rem;font-weight:500;color:var(--ink);margin-bottom:0.3rem;">A note on how I'd suggest thinking about this</p>
+      <p style="font-size:0.82rem;color:var(--muted);line-height:1.7;">The tool takes ongoing care to maintain — subscriptions, configuration, and continuous improvement based on what I learn from each client. That work is real, and it's reflected in the pricing. That said, I've kept the standalone tool competitive with the better CV builders on the market, and deliberately kept it bundled into coaching so that the combination remains the best value. If you're committing to a search, the coaching + tool package is what I'd recommend — it's where the results come from.</p>
+    </div>
+  </div>
+
+  <div class="pricing-row">
+    <div class="price-card">
+      <p class="price-tag">Tool only</p>
+      <div class="price-amount">€35</div>
+      <p class="price-period">per month</p>
+      <div class="price-line"></div>
+      <ul class="price-list">
+        <li>Full access to the AI CV builder</li>
+        <li>Unlimited resume generations</li>
+        <li>Configurable to your profile</li>
+        <li>Secure, private workspace</li>
+        <li>For self-directed job seekers</li>
+      </ul>
+    </div>
+
+    <div class="price-card featured" style="position:relative;">
+      <div style="position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:var(--yellow);color:var(--ink);font-size:0.7rem;font-weight:500;letter-spacing:0.08em;text-transform:uppercase;padding:0.3rem 1rem;border-radius:0 0 6px 6px;white-space:nowrap;">Recommended</div>
+      <p class="price-tag" style="margin-top:1.25rem;">Coaching + tool included</p>
+      <div class="price-amount">€80</div>
+      <p class="price-period">per hour · tool access included</p>
+      <div class="price-line"></div>
+      <ul class="price-list">
+        <li>One-to-one strategy sessions</li>
+        <li>Tool access included at no extra cost</li>
+        <li>Role and industry positioning</li>
+        <li>CV review and editorial feedback</li>
+        <li>Interview narrative preparation</li>
+        <li>Available in English and German</li>
+      </ul>
+    </div>
+
+    <div class="price-card">
+      <p class="price-tag">Per CV generated</p>
+      <div class="price-amount">€18</div>
+      <p class="price-period">per document</p>
+      <div class="price-line"></div>
+      <ul class="price-list">
+        <li>Pay only for what you use</li>
+        <li>No monthly commitment</li>
+        <li>Each CV tailored to a specific role</li>
+        <li>Good for focused, targeted searches</li>
+        <li>Combine with coaching as needed</li>
+      </ul>
+    </div>
+  </div>
+  <p class="pricing-footnote">Prices can always be discussed — reach out and we'll find an arrangement that works for where you are in your search.</p>
+</section>
+
+<!-- ABOUT -->
+<section class="section" id="about" style="background:var(--surface);border-top:1px solid var(--border);">
+  <div class="about-wrap">
+    <div class="about-photo-col">
+      <div class="about-photo-frame">
+        <img src="./jenny-photo.png" alt="Jennifer Simonds" class="about-photo-main" />
+        <div class="about-photo-badge">
+          <strong>Jennifer Simonds</strong>
+          <span>UX & AI Design Leader · Berlin</span>
+        </div>
+      </div>
+    </div>
+    <div class="about-content">
+      <p class="section-kicker">About your coach</p>
+      <h2 class="section-title">10+ years designing systems that people actually use</h2>
+      <div class="about-text">
+        <p>I'm a Senior UX and AI Design specialist based in Berlin, with experience spanning <strong>government digital services, accessibility compliance, and responsible AI governance.</strong> I've led design teams of up to 64 people, shipped products to over a million users, and worked at the intersection of complex systems and the real humans who navigate them.</p>
+        <p>I built this CV tool because I kept watching capable, experienced professionals lose weeks — and confidence — to an administrative task that shouldn't be that hard. The AI handles the structure and language. The coaching handles everything the AI can't: <strong>your story, your positioning, your goals.</strong></p>
+        <p>My background is in design for responsible AI — which means I take seriously how tools like this should work, what they should be transparent about, and where human judgement is non-negotiable. That thinking is built into everything here.</p>
+        <p>I work with professionals across industries, in English and German, based in Berlin and working internationally.</p>
+      </div>
+      <div class="credentials">
+        <span class="cred">MA Design for Responsible AI</span>
+        <span class="cred">BITV / WCAG Accessibility</span>
+        <span class="cred">UX & AI Governance</span>
+        <span class="cred">Government Digital Services</span>
+        <span class="cred">English & German</span>
+        <span class="cred">Berlin-based</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SAFETY BAR -->
+<div class="safety-bar">
+  <div class="safety-icon">🔒</div>
+  <div class="safety-text">
+    <strong>Your data is private and secure</strong>
+    <p>Nothing you share is used to train models, shared externally, or retained beyond your session.</p>
+  </div>
+  <div class="safety-divider"></div>
+  <div class="safety-icon">✓</div>
+  <div class="safety-text">
+    <strong>Transparent AI usage</strong>
+    <p>The tool uses AI openly. You always know what it's doing and remain in control of the output.</p>
+  </div>
+  <div class="safety-divider"></div>
+  <div class="safety-icon">↗</div>
+  <div class="safety-text">
+    <strong>Continuously improving</strong>
+    <p>The tool evolves based on real client feedback and usage — it gets better with every engagement.</p>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-section">
+  <div class="cta-text">
+    <h2>Individual coaching and personal AI tools for job hunting.</h2>
+    <p>Including a CV builder <mark style="background:var(--ink);color:var(--yellow);padding:0 0.2em;border-radius:2px;font-weight:500;">proved to be successful.</mark> Try it directly, or get in touch to talk through what combination of coaching and tools makes sense for where you are right now.</p>
+  </div>
+  <div class="cta-actions">
+    <a href="https://cvresume-vqtg.vercel.app/" target="_blank" class="btn-dark">Open the CV tool →</a>
+    <a href="mailto:info@jennifersimonds.com" style="display:inline-flex;align-items:center;gap:0.5rem;background:white;color:var(--ink);font-size:0.95rem;font-weight:500;padding:0.85rem 1.75rem;border-radius:3px;text-decoration:none;transition:background 0.2s;border:1.5px solid rgba(17,18,16,0.15);">
+      ✉ info@jennifersimonds.com
+    </a>
+  </div>
+</div>
+
+<footer>
+  <a class="footer-logo" href="#">CV by Design</a>
+  <ul class="footer-links">
+    <li><a href="https://jennifersimonds.com" target="_blank">Portfolio</a></li>
+    <li><a href="./coaches-landing.html">For coaches</a></li>
+    <li><a href="https://cvresume-vqtg.vercel.app/" target="_blank">CV Tool</a></li>
+    <li><a href="mailto:info@jennifersimonds.com">Contact</a></li>
+    <li><a href="./imprint.html">Imprint</a></li>
+  </ul>
+  <span class="footer-copy">© 2026 Jennifer Simonds · Berlin · Your data is always safe.</span>
+</footer>
+
+</body>
+</html>
