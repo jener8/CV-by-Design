@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CV Tool for Coaches — Partner with Jennifer Simonds</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Instrument+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --ink: #111210;
+    --paper: #f7f5f0;
+    --white: #ffffff;
+    --yellow: #f0d44a;
+    --pink: #e8608a;
+    --cyan: #3dcfb8;
+    --muted: #7a786e;
+    --muted-light: #a8a69e;
+    --border: #e2ddd6;
+    --surface: #f0ede6;
+    --deep: #1a1f1e;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Instrument Sans', sans-serif;
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.65;
+    overflow-x: hidden;
+  }
+
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(247,245,240,0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    padding: 1.1rem 3rem;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem; color: var(--ink); text-decoration: none; letter-spacing: -0.01em;
+  }
+  .nav-logo span { color: var(--muted-light); font-weight: 300; font-size: 0.9rem; margin-left: 0.5rem; }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
+  .nav-links a {
+    font-size: 0.82rem; color: var(--muted); text-decoration: none;
+    font-weight: 400; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-cta {
+    background: var(--cyan) !important; color: var(--ink) !important;
+    padding: 0.55rem 1.4rem; border-radius: 3px; font-weight: 500 !important;
+    letter-spacing: 0.02em !important; text-transform: none !important; transition: background 0.2s !important;
+  }
+  .nav-cta:hover { background: var(--pink) !important; color: white !important; }
+
+  /* HERO — full dark, editorial */
+  .hero {
+    background: var(--deep);
+    min-height: 80vh;
+    display: grid;
+    grid-template-columns: 60% 40%;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-glow {
+    position: absolute; inset: 0; pointer-events: none;
+    background: radial-gradient(ellipse at 80% 20%, rgba(61,207,184,0.07) 0%, transparent 55%),
+                radial-gradient(ellipse at 10% 80%, rgba(240,212,74,0.05) 0%, transparent 50%);
+  }
+  .hero-left {
+    padding: 7rem 4rem 7rem 5rem;
+    display: flex; flex-direction: column; justify-content: center;
+    border-right: 1px solid rgba(255,255,255,0.07);
+    position: relative; z-index: 2;
+  }
+  .hero-eyebrow {
+    display: flex; align-items: center; gap: 0.75rem;
+    font-size: 0.74rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--cyan); margin-bottom: 2rem;
+  }
+  .hero-eyebrow::before {
+    content: ''; display: block; width: 1.5rem; height: 1px; background: var(--cyan);
+  }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.6rem, 4vw, 3.8rem); line-height: 1.1;
+    color: white; margin-bottom: 2rem; letter-spacing: -0.02em;
+  }
+  .hero-title em { font-style: italic; color: var(--cyan); }
+  .hero-body {
+    font-size: 1rem; color: rgba(255,255,255,0.5); max-width: 460px;
+    margin-bottom: 3rem; line-height: 1.8; font-weight: 300;
+  }
+  .hero-actions { display: flex; gap: 1.25rem; align-items: center; }
+  .btn-cyan {
+    background: var(--cyan); color: var(--ink); padding: 0.9rem 2.25rem; border-radius: 3px;
+    font-size: 0.9rem; font-weight: 500; text-decoration: none; transition: background 0.2s, transform 0.15s;
+    letter-spacing: 0.02em; display: inline-flex; align-items: center; gap: 0.5rem;
+  }
+  .btn-cyan:hover { background: white; transform: translateY(-1px); }
+  .btn-ghost-light {
+    color: rgba(255,255,255,0.4); font-size: 0.85rem; text-decoration: none;
+    border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 1px; transition: color 0.2s;
+  }
+  .btn-ghost-light:hover { color: white; border-color: white; }
+
+  .hero-right {
+    display: flex; flex-direction: column; justify-content: center;
+    padding: 4rem 3rem; position: relative; z-index: 2;
+  }
+  .hero-right-label {
+    font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: rgba(255,255,255,0.25); margin-bottom: 2rem;
+  }
+  .coach-persona {
+    display: flex; flex-direction: column; gap: 1rem; margin-bottom: 3rem;
+  }
+  .persona-pill {
+    padding: 1rem 1.25rem;
+    border: 1px solid rgba(255,255,255,0.1); border-radius: 6px;
+    display: flex; align-items: center; gap: 1rem;
+    transition: border-color 0.2s;
+  }
+  .persona-pill:hover { border-color: rgba(61,207,184,0.4); }
+  .persona-dot {
+    width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+  }
+  .persona-text {
+    font-size: 0.85rem; color: rgba(255,255,255,0.55); line-height: 1.4;
+  }
+  .persona-text strong { color: rgba(255,255,255,0.85); font-weight: 500; display: block; margin-bottom: 0.1rem; }
+
+  .hero-divider { height: 1px; background: rgba(255,255,255,0.08); margin-bottom: 2rem; }
+
+  .hero-photo-row {
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .hero-photo {
+    width: 52px; height: 52px; border-radius: 50%; object-fit: cover;
+    border: 1.5px solid rgba(255,255,255,0.15);
+  }
+  .hero-photo-text strong { display: block; font-size: 0.88rem; color: white; font-weight: 500; margin-bottom: 0.15rem; }
+  .hero-photo-text span { font-size: 0.78rem; color: rgba(255,255,255,0.35); }
+
+  /* SECTIONS */
+  .section { padding: 6rem 5rem; }
+  .section-kicker {
+    font-size: 0.74rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--muted-light); margin-bottom: 1rem;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3vw, 2.5rem); line-height: 1.15; letter-spacing: -0.02em;
+    max-width: 640px; margin-bottom: 3.5rem; color: var(--ink);
+  }
+
+  /* WHAT YOU GET */
+  .offer-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;
+  }
+  .offer-card {
+    padding: 2.5rem; border: 1px solid var(--border);
+    border-radius: 6px; background: var(--white);
+  }
+  .offer-card.dark {
+    background: var(--deep); border-color: var(--deep); color: white;
+  }
+  .offer-icon {
+    font-size: 1.1rem; margin-bottom: 1.25rem;
+    width: 40px; height: 40px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    border: 1px solid var(--border);
+    background: var(--surface);
+  }
+  .offer-card.dark .offer-icon {
+    background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.1);
+  }
+  .offer-card h3 { font-size: 1rem; font-weight: 500; margin-bottom: 0.6rem; color: var(--ink); }
+  .offer-card.dark h3 { color: white; }
+  .offer-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.7; }
+  .offer-card.dark p { color: rgba(255,255,255,0.5); }
+
+  /* HOW IT WORKS */
+  .collab-section { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .collab-steps {
+    display: flex; flex-direction: column; gap: 0;
+    border: 1px solid var(--border); border-radius: 6px; overflow: hidden;
+  }
+  .collab-step {
+    display: grid; grid-template-columns: 80px 1fr;
+    border-bottom: 1px solid var(--border); background: var(--white);
+  }
+  .collab-step:last-child { border-bottom: none; }
+  .collab-step-num {
+    padding: 2rem 1.5rem; border-right: 1px solid var(--border);
+    display: flex; align-items: flex-start; justify-content: center;
+    font-family: 'Playfair Display', serif; font-size: 1.5rem;
+    color: var(--muted-light); padding-top: 2.2rem;
+  }
+  .collab-step-content { padding: 2rem 2.5rem; }
+  .collab-step-content h3 { font-size: 0.95rem; font-weight: 500; margin-bottom: 0.4rem; color: var(--ink); }
+  .collab-step-content p { font-size: 0.85rem; color: var(--muted); line-height: 1.7; }
+
+  /* PRICING */
+  .pricing-intro {
+    background: var(--deep); color: white;
+    padding: 2rem 2.5rem; border-radius: 6px;
+    margin-bottom: 2rem;
+    display: flex; gap: 1.25rem; align-items: flex-start;
+  }
+  .pricing-intro-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--cyan); margin-top: 6px; flex-shrink: 0; }
+  .pricing-intro p { font-size: 0.88rem; color: rgba(255,255,255,0.55); line-height: 1.75; }
+  .pricing-intro p strong { color: white; font-weight: 500; }
+
+  .pricing-row {
+    display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem;
+  }
+  .price-card {
+    border: 1px solid var(--border); border-radius: 6px; padding: 2.5rem 2rem;
+    background: var(--white); transition: box-shadow 0.2s, transform 0.2s; position: relative;
+  }
+  .price-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.07); transform: translateY(-3px); }
+  .price-card.featured { background: var(--deep); border-color: var(--deep); color: white; }
+  .price-tag {
+    font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase;
+    color: var(--muted-light); margin-bottom: 1.5rem;
+  }
+  .price-card.featured .price-tag { color: var(--cyan); }
+  .price-amount {
+    font-family: 'Playfair Display', serif; font-size: 2.6rem; line-height: 1;
+    color: var(--ink); margin-bottom: 0.3rem; letter-spacing: -0.02em;
+  }
+  .price-card.featured .price-amount { color: white; }
+  .price-period { font-size: 0.8rem; color: var(--muted-light); margin-bottom: 2rem; font-weight: 300; }
+  .price-card.featured .price-period { color: rgba(255,255,255,0.35); }
+  .price-line { height: 1px; background: var(--border); margin-bottom: 1.75rem; }
+  .price-card.featured .price-line { background: rgba(255,255,255,0.1); }
+  .price-list {
+    list-style: none; display: flex; flex-direction: column; gap: 0.7rem;
+    font-size: 0.85rem; color: var(--muted);
+  }
+  .price-card.featured .price-list { color: rgba(255,255,255,0.55); }
+  .price-list li { display: flex; gap: 0.6rem; align-items: flex-start; line-height: 1.5; }
+  .price-list li::before { content: '–'; color: var(--cyan); flex-shrink: 0; font-weight: 500; }
+  .price-footnote {
+    font-size: 0.82rem; color: var(--muted); text-align: center; padding: 1.25rem;
+    border: 1px solid var(--border); border-radius: 6px; background: var(--surface);
+  }
+  .recommend-badge {
+    position: absolute; top: -1px; left: 50%; transform: translateX(-50%);
+    background: var(--cyan); color: var(--ink);
+    font-size: 0.7rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 0.3rem 1rem; border-radius: 0 0 6px 6px; white-space: nowrap;
+  }
+
+  /* ABOUT STRIP */
+  .about-strip {
+    background: var(--ink); color: white;
+    display: grid; grid-template-columns: 300px 1fr; gap: 0; align-items: stretch;
+  }
+  .about-photo-side {
+    position: relative; overflow: hidden;
+  }
+  .about-photo-side img {
+    width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; opacity: 0.7;
+  }
+  .about-text-side {
+    padding: 5rem 4rem 5rem 5rem;
+    border-left: 1px solid rgba(255,255,255,0.08);
+  }
+  .about-text-side .section-kicker { color: var(--cyan); }
+  .about-text-side h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 2.5vw, 2.2rem); line-height: 1.2; letter-spacing: -0.02em;
+    color: white; margin-bottom: 1.75rem; max-width: 520px;
+  }
+  .about-text-side p { font-size: 0.92rem; color: rgba(255,255,255,0.5); line-height: 1.8; font-weight: 300; margin-bottom: 1rem; }
+  .about-text-side p strong { color: rgba(255,255,255,0.85); font-weight: 500; }
+  .about-creds {
+    display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.75rem;
+  }
+  .cred {
+    font-size: 0.75rem; padding: 0.3rem 0.85rem; border-radius: 100px;
+    border: 1px solid rgba(255,255,255,0.12); color: rgba(255,255,255,0.4);
+  }
+
+  /* CTA */
+  .cta-section {
+    background: var(--yellow); padding: 5rem;
+    display: grid; grid-template-columns: 1fr auto; gap: 4rem; align-items: center;
+  }
+  .cta-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3vw, 2.5rem); letter-spacing: -0.02em;
+    color: var(--ink); line-height: 1.15; margin-bottom: 0.75rem;
+  }
+  .cta-section p { font-size: 0.95rem; color: rgba(17,18,16,0.6); max-width: 480px; line-height: 1.7; font-weight: 300; }
+  .cta-actions { display: flex; flex-direction: column; gap: 0.75rem; align-items: flex-end; flex-shrink: 0; }
+  .btn-dark {
+    background: var(--ink); color: var(--paper); padding: 1rem 2.25rem; border-radius: 3px;
+    font-size: 0.9rem; font-weight: 500; text-decoration: none; white-space: nowrap;
+    transition: background 0.2s; letter-spacing: 0.02em; display: inline-block;
+  }
+  .btn-dark:hover { background: #2d2c28; }
+  .cta-note { font-size: 0.78rem; color: rgba(17,18,16,0.45); }
+  .cta-note a { color: rgba(17,18,16,0.5); text-decoration: none; border-bottom: 1px solid rgba(17,18,16,0.3); }
+
+  /* FOOTER */
+  footer {
+    background: var(--ink); padding: 2rem 5rem;
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
+  }
+  .footer-logo { font-family: 'Playfair Display', serif; color: rgba(255,255,255,0.6); font-size: 1rem; text-decoration: none; }
+  .footer-links { display: flex; gap: 2rem; list-style: none; }
+  .footer-links a { font-size: 0.78rem; color: rgba(255,255,255,0.3); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: rgba(255,255,255,0.7); }
+  .footer-copy { font-size: 0.75rem; color: rgba(255,255,255,0.25); }
+
+  @media (max-width: 1000px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links li:not(:last-child) { display: none; }
+    .hero { grid-template-columns: 1fr; min-height: auto; }
+    .hero-left { padding: 4rem 2rem; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); }
+    .hero-right { padding: 3rem 2rem; }
+    .section { padding: 4rem 2rem; }
+    .offer-grid { grid-template-columns: 1fr; }
+    .pricing-row { grid-template-columns: 1fr; }
+    .about-strip { grid-template-columns: 1fr; }
+    .about-photo-side { height: 280px; }
+    .about-text-side { padding: 3rem 2rem; }
+    .cta-section { grid-template-columns: 1fr; padding: 4rem 2rem; }
+    .cta-actions { align-items: flex-start; }
+    footer { padding: 1.5rem 2rem; flex-direction: column; text-align: center; }
+    .footer-links { justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#">CV by Design <span>for Coaches</span></a>
+  <ul class="nav-links">
+    <li><a href="#offer">What you get</a></li>
+    <li><a href="#how">How it works</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="mailto:hello@jennifersimonds.com" class="nav-cta">Get in touch →</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" style="padding:0;">
+  <div class="hero-glow"></div>
+  <div class="hero-left">
+    <p class="hero-eyebrow">For career coaches and practitioners</p>
+    <h1 class="hero-title">
+      Give your clients<br>an AI tool<br>
+      <em>built around them.</em>
+    </h1>
+    <p class="hero-body">
+      If you work with job seekers and want to offer more than advice — a purpose-built, maintained AI resume tool,
+      configured to your clients' needs, available under your practice. You bring the coaching.
+      I build and run the tool.
+    </p>
+    <div class="hero-actions">
+      <a href="mailto:hello@jennifersimonds.com" class="btn-cyan">Let's talk →</a>
+      <a href="#offer" class="btn-ghost-light">See what's included</a>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <p class="hero-right-label">This is for coaches who work with</p>
+    <div class="coach-persona">
+      <div class="persona-pill">
+        <div class="persona-dot" style="background:var(--cyan);"></div>
+        <div class="persona-text">
+          <strong>Career changers and senior professionals</strong>
+          People making deliberate moves who need more than a template
+        </div>
+      </div>
+      <div class="persona-pill">
+        <div class="persona-dot" style="background:var(--yellow);"></div>
+        <div class="persona-text">
+          <strong>Executives and leadership candidates</strong>
+          High-stakes applications where quality and positioning are everything
+        </div>
+      </div>
+      <div class="persona-pill">
+        <div class="persona-dot" style="background:var(--pink);"></div>
+        <div class="persona-text">
+          <strong>Clients across different industries</strong>
+          Varied profiles that need a flexible tool, not a one-size-fits-all generator
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-divider"></div>
+
+    <div class="hero-photo-row">
+      <img src="./jenny-photo.png" alt="Jennifer Simonds" class="hero-photo" />
+      <div class="hero-photo-text">
+        <strong>Jennifer Simonds</strong>
+        <span>UX & AI Design Leader · Berlin · Building and maintaining the tool</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT YOU GET -->
+<section class="section" id="offer">
+  <p class="section-kicker">What's included</p>
+  <h2 class="section-title">A tool partnership — not a licence fee for software you have to figure out yourself</h2>
+  <div class="offer-grid">
+    <div class="offer-card">
+      <div class="offer-icon">⚙</div>
+      <h3>Tool configured for your client profile</h3>
+      <p>The AI resume builder is set up and adapted to the kinds of clients you work with — their industries, seniority levels, and typical search contexts. Not a generic tool with your logo on it.</p>
+    </div>
+    <div class="offer-card">
+      <div class="offer-icon">↻</div>
+      <h3>Ongoing maintenance and updates</h3>
+      <p>I maintain the tool as it evolves. When something isn't working as well as it should, when you have new client types, or when the underlying AI changes — I handle it. You don't have to.</p>
+    </div>
+    <div class="offer-card">
+      <div class="offer-icon">🔒</div>
+      <h3>Private and secure for your clients</h3>
+      <p>Each client gets a secure, private workspace. Their data is not shared, not used to train models, not visible to other clients. You can offer this to clients with confidence.</p>
+    </div>
+    <div class="offer-card dark">
+      <div class="offer-icon">◎</div>
+      <h3>Honest about what it is</h3>
+      <p>The tool is AI-powered and still evolving — I'm upfront about that. It gets better over time based on real usage. What I can tell you now is that combined with good coaching, it works. 1 in 5 CVs built this way lead to an interview.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section collab-section" id="how">
+  <p class="section-kicker">How we work together</p>
+  <h2 class="section-title">Simple, direct — no complicated onboarding</h2>
+  <div class="collab-steps">
+    <div class="collab-step">
+      <div class="collab-step-num">01</div>
+      <div class="collab-step-content">
+        <h3>We have a conversation about your practice</h3>
+        <p>Tell me who your clients are, what you're already doing, and what you'd like the tool to handle. I'll be honest about what it can and can't do well for your specific use case.</p>
+      </div>
+    </div>
+    <div class="collab-step">
+      <div class="collab-step-num">02</div>
+      <div class="collab-step-content">
+        <h3>I configure the tool for your client types</h3>
+        <p>Based on our conversation, I adapt the setup — industry focus, tone, seniority calibration, output format. This takes a week or two depending on complexity.</p>
+      </div>
+    </div>
+    <div class="collab-step">
+      <div class="collab-step-num">03</div>
+      <div class="collab-step-content">
+        <h3>You start using it with clients, I support the tool</h3>
+        <p>You integrate it into your sessions however makes sense for your practice. I stay available for changes, improvements, and anything that isn't working as expected.</p>
+      </div>
+    </div>
+    <div class="collab-step">
+      <div class="collab-step-num">04</div>
+      <div class="collab-step-content">
+        <h3>We refine together over time</h3>
+        <p>As you use it with more clients, we'll learn what works. Feedback from your practice feeds into how the tool develops. The arrangement stays useful, not static.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section" id="pricing">
+  <p class="section-kicker">Pricing</p>
+  <h2 class="section-title">Transparent costs — no hidden overhead</h2>
+
+  <div class="pricing-intro">
+    <div class="pricing-intro-dot"></div>
+    <p>
+      <strong>A note on how this works financially.</strong> Running an AI tool has real ongoing costs —
+      API usage, hosting, and the time it takes to maintain and improve it as it evolves.
+      The pricing below reflects that honestly. It is not a SaaS margin — it is what it costs to keep
+      a well-maintained, actively improving tool available for your clients, plus a fair return for the ongoing work.
+      If your volume is higher or lower than these tiers, reach out and we'll work something out.
+    </p>
+  </div>
+
+  <div class="pricing-row">
+    <div class="price-card">
+      <p class="price-tag">Getting started</p>
+      <div class="price-amount">€150</div>
+      <p class="price-period">one-time setup</p>
+      <div class="price-line"></div>
+      <ul class="price-list">
+        <li>Initial consultation and scoping</li>
+        <li>Tool configured for your client profile</li>
+        <li>Onboarding session for you as the coach</li>
+        <li>First month's access included</li>
+        <li>Up to 5 client activations to start</li>
+      </ul>
+    </div>
+
+    <div class="price-card featured" style="margin-top: 0;">
+      <div class="recommend-badge">Most popular</div>
+      <p class="price-tag" style="margin-top:1.25rem;">Monthly partnership</p>
+      <div class="price-amount">€120</div>
+      <p class="price-period">per month · up to 10 active clients</p>
+      <div class="price-line"></div>
+      <ul class="price-list">
+        <li>Tool access for up to 10 clients at a time</li>
+        <li>Ongoing maintenance and improvements</li>
+        <li>Configuration updates as your needs change</li>
+        <li>Direct line to me for issues and requests</li>
+        <li>Monthly check-in on what's working</li>
+        <li>Scales down if your volume is lower</li>
+      </ul>
+    </div>
+
+    <div class="price-card">
+      <p class="price-tag">Larger practice</p>
+      <div class="price-amount" style="font-size:2rem;padding-top:0.5rem;line-height:1.2;">Let's<br>discuss</div>
+      <p class="price-period">tailored to your volume</p>
+      <div class="price-line"></div>
+      <ul class="price-list">
+        <li>10+ active clients simultaneously</li>
+        <li>Custom configuration depth</li>
+        <li>Priority turnaround on changes</li>
+        <li>Per-seat or flat-rate options</li>
+        <li>Group or team coach arrangements</li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="price-footnote">
+    All arrangements include the setup fee on first engagement. Prices can always be discussed — the goal is a working partnership, not a rigid contract.
+  </p>
+</section>
+
+<!-- ABOUT -->
+<div class="about-strip" id="about">
+  <div class="about-photo-side">
+    <img src="./jenny-photo.png" alt="Jennifer Simonds" />
+  </div>
+  <div class="about-text-side">
+    <p class="section-kicker">Who you're working with</p>
+    <h2>A designer and builder who understands how coaching actually works</h2>
+    <p>
+      I'm Jennifer Simonds — a Senior UX and AI Design specialist based in Berlin.
+      I built the CV tool originally for my own coaching practice, so I understand what coaches
+      actually need from a tool like this: <strong>something that saves time, produces real results,
+      and doesn't require you to become a prompt engineer to use.</strong>
+    </p>
+    <p>
+      My background spans government digital services, responsible AI design, and accessibility compliance.
+      That means I take seriously how tools like this should behave — transparently, securely, and in a way
+      that <strong>supports your professional relationship with your clients</strong> rather than complicating it.
+    </p>
+    <p>
+      I work in English and German and am based in Berlin, but work with coaches internationally.
+    </p>
+    <div class="about-creds">
+      <span class="cred">MA Design for Responsible AI</span>
+      <span class="cred">UX & AI Governance</span>
+      <span class="cred">10+ years in UX</span>
+      <span class="cred">English & German</span>
+      <span class="cred">Berlin-based</span>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-section">
+  <div>
+    <h2>Interested in offering this to your clients?</h2>
+    <p>
+      The best starting point is a conversation. Tell me about your practice, who your clients are,
+      and what you're trying to solve — and I'll tell you honestly whether this is a good fit.
+    </p>
+  </div>
+  <div class="cta-actions">
+    <a href="mailto:hello@jennifersimonds.com" class="btn-dark">Get in touch →</a>
+    <span class="cta-note">Or see the <a href="index.html">client-facing tool page</a></span>
+  </div>
+</div>
+
+<footer>
+  <a class="footer-logo" href="#">CV by Design · For Coaches</a>
+  <ul class="footer-links">
+    <li><a href="https://jennifersimonds.com" target="_blank">Portfolio</a></li>
+    <li><a href="./index.html">For job seekers</a></li>
+    <li><a href="mailto:hello@jennifersimonds.com">Contact</a></li>
+    <li><a href="./imprint.html">Imprint</a></li>
+  </ul>
+  <span class="footer-copy">© 2026 Jennifer Simonds · Berlin</span>
+</footer>
+
+</body>
+</html>
