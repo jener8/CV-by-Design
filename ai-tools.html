@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bespoke AI Tools — CV by Design</title>
+<title>Personalised AI Tools — CV by Design</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Instrument+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -27,6 +27,14 @@
   .nav-links { display: flex; gap: 1.5rem; list-style: none; align-items: center; }
   .nav-links a { font-family: 'Instrument Sans', sans-serif; font-size: 0.78rem; color: var(--muted); text-decoration: none; font-weight: 400; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s; }
   .nav-links a:hover { color: var(--ink); }
+  .nav-links a.nav-pillar {
+    color: #e8608a;
+    font-weight: 500;
+    text-transform: none;
+    letter-spacing: 0.01em;
+    font-size: 0.78rem;
+  }
+  .nav-links a.nav-pillar:hover { color: var(--ink); }
   .nav-active { color: var(--yellow) !important; border-bottom: 2px solid var(--yellow); padding-bottom: 2px; }
   .nav-cta { background: var(--ink) !important; color: var(--paper) !important; padding: 0.5rem 1.1rem; border-radius: 3px; font-weight: 500 !important; letter-spacing: 0.02em !important; text-transform: none !important; font-size: 0.78rem !important; transition: background 0.2s !important; white-space: nowrap; }
   .nav-cta:hover { background: var(--pink) !important; }
@@ -36,6 +44,38 @@
   .mobile-menu.open { display: flex; }
   .mobile-menu a { font-family: 'Instrument Sans', sans-serif; font-size: 0.88rem; color: var(--muted); text-decoration: none; padding: 0.85rem 0; border-bottom: 1px solid var(--border); font-weight: 400; text-transform: uppercase; letter-spacing: 0.04em; }
   .mobile-menu a:last-child { border-bottom: none; }
+  .mobile-menu a.nav-pillar {
+    color: #e8608a;
+    font-weight: 500;
+    text-transform: none;
+    letter-spacing: 0.01em;
+    font-size: 0.78rem;
+  }
+  .mobile-menu a.nav-pillar:hover { color: var(--ink); }
+  .mobile-menu a.nav-cta-mobile {
+    background: var(--ink); color: var(--paper) !important;
+    padding: 0.65rem 1rem; border-radius: 3px; font-weight: 500 !important;
+    text-transform: none !important; letter-spacing: 0.02em !important;
+    font-size: 0.85rem !important; text-align: center; margin-top: 0.35rem;
+    border-bottom: none !important;
+  }
+  .mobile-menu a.nav-cta-mobile:hover { background: var(--pink) !important; color: var(--paper) !important; }
+  .nav-mobile-only { display: none !important; }
+  @media (max-width: 860px) {
+    nav { padding: 0.75rem 1rem; gap: 0.5rem; }
+    .nav-logo { flex: 1; min-width: 0; line-height: 1.2; }
+    .nav-links { gap: 0.35rem; flex-shrink: 0; }
+    .nav-links > li.nav-desktop-only { display: none !important; }
+    .nav-mobile-only { display: list-item !important; }
+    .hamburger {
+      min-width: 44px; min-height: 44px;
+      align-items: center; justify-content: center;
+      padding: 10px;
+    }
+  }
+  @media (max-width: 420px) {
+    .nav-logo span { display: none; }
+  }
 
   /* HERO */
   .hero { background: #111210; padding: 7rem 5rem 6rem; position: relative; overflow: hidden; }
@@ -144,21 +184,22 @@
 <body>
 
 <nav style="position:relative;">
-  <a class="nav-logo" href="./index.html">CV by Design <span>bespoke AI tools</span></a>
+  <a class="nav-logo" href="./index.html">CV by Design <span>personalised AI tools</span></a>
   <ul class="nav-links">
-    <li><a href="./index.html" style="text-transform:none;letter-spacing:0.01em;color:var(--muted);">For career development</a></li>
-    <li><a href="./coaches-landing.html" style="text-transform:none;letter-spacing:0.01em;color:var(--muted);">For coaches</a></li>
-    <li><a href="mailto:info@jennifersimonds.com" style="color:var(--ink);border:1px solid var(--border);padding:0.4rem 0.85rem;border-radius:3px;letter-spacing:0.01em;text-transform:none;font-size:0.78rem;white-space:nowrap;">✉ info@jennifersimonds.com</a></li>
-    <li><a href="mailto:info@jennifersimonds.com" class="nav-cta">Get in touch →</a></li>
-    <li><button class="hamburger" onclick="document.getElementById('mobile-nav-ai').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button></li>
+    <li class="nav-desktop-only"><a class="nav-pillar" href="./index.html">For career development</a></li>
+    <li class="nav-desktop-only"><a class="nav-pillar" href="./coaches-landing.html">For coaches</a></li>
+    <li class="nav-desktop-only"><a href="mailto:info@jennifersimonds.com" style="color:var(--ink);border:1px solid var(--border);padding:0.4rem 0.85rem;border-radius:3px;letter-spacing:0.01em;text-transform:none;font-size:0.78rem;white-space:nowrap;">✉ info@jennifersimonds.com</a></li>
+    <li class="nav-desktop-only"><a href="mailto:info@jennifersimonds.com" class="nav-cta">Get in touch →</a></li>
+    <li class="nav-mobile-only"><button type="button" class="hamburger" onclick="document.getElementById('mobile-nav-ai').classList.toggle('open')" aria-label="Open menu" aria-controls="mobile-nav-ai"><span></span><span></span><span></span></button></li>
   </ul>
   <div class="mobile-menu" id="mobile-nav-ai">
-    <a href="#usecases">Who it's for</a>
-    <a href="#included">What's included</a>
-    <a href="#pricing">Pricing</a>
-    <a href="./index.html">For career development</a>
-    <a href="./coaches-landing.html">For coaches</a>
-    <a href="mailto:info@jennifersimonds.com">✉ info@jennifersimonds.com</a>
+    <a href="#usecases" onclick="document.getElementById('mobile-nav-ai').classList.remove('open')">Who it's for</a>
+    <a href="#included" onclick="document.getElementById('mobile-nav-ai').classList.remove('open')">What's included</a>
+    <a href="#pricing" onclick="document.getElementById('mobile-nav-ai').classList.remove('open')">Pricing</a>
+    <a class="nav-pillar" href="./index.html" onclick="document.getElementById('mobile-nav-ai').classList.remove('open')">For career development</a>
+    <a class="nav-pillar" href="./coaches-landing.html" onclick="document.getElementById('mobile-nav-ai').classList.remove('open')">For coaches</a>
+    <a href="mailto:info@jennifersimonds.com" onclick="document.getElementById('mobile-nav-ai').classList.remove('open')">✉ info@jennifersimonds.com</a>
+    <a href="mailto:info@jennifersimonds.com" class="nav-cta-mobile" onclick="document.getElementById('mobile-nav-ai').classList.remove('open')">Get in touch →</a>
   </div>
 </nav>
 
@@ -166,7 +207,7 @@
 <section class="hero">
   <div class="hero-glow"></div>
   <div class="hero-inner">
-    <p class="hero-kicker">Bespoke AI Tools · Business & Personal</p>
+    <p class="hero-kicker">Personalised AI Tools · Business & Personal</p>
     <h1 class="hero-title">
       AI tools built<br>around <em>your work,</em><br>not the other way around.
     </h1>
@@ -190,7 +231,7 @@
     <div class="use-card">
       <div class="use-icon">◎</div>
       <h3>Building a business</h3>
-      <p>You're in early stages and need to move fast — but you're spending too much time on things that could be automated or structured better. A bespoke AI tool frees you to focus on what matters.</p>
+      <p>You're in early stages and need to move fast — but you're spending too much time on things that could be automated or structured better. A personalised AI tool frees you to focus on what matters.</p>
       <div class="use-examples">
         <div class="use-example">Proposal and pitch generation</div>
         <div class="use-example">Client intake and onboarding flows</div>
@@ -235,7 +276,7 @@
     <div class="included-card">
       <div class="included-num">02</div>
       <div>
-        <h3>Bespoke tool design and build</h3>
+        <h3>Personalised tool design and build</h3>
         <p>I design and build the AI tool around your specific needs — configured to your workflow, your language, and your outputs. Not a template. Not a plugin. Something that fits.</p>
       </div>
     </div>
@@ -301,7 +342,7 @@
     <div class="pricing-note-dot"></div>
     <p>
       <strong>This is more involved than the CV tool — and priced accordingly.</strong>
-      Building, maintaining, and coaching around a bespoke AI tool takes real time and expertise.
+      Building, maintaining, and coaching around a personalised AI tool takes real time and expertise.
       Costs depend on complexity, scope, and ongoing needs. The prices below are starting points —
       every engagement is quoted specifically after an initial conversation.
     </p>
@@ -329,7 +370,7 @@
       <p class="price-period">project fee · scope-dependent</p>
       <div class="price-line"></div>
       <ul class="price-list">
-        <li>Bespoke AI tool designed and built</li>
+        <li>Personalised AI tool designed and built</li>
         <li>Coaching sessions included</li>
         <li>Testing and iteration rounds</li>
         <li>Documentation and handover</li>
@@ -358,7 +399,7 @@
 <div class="cta-section">
   <div>
     <h2>Not sure what you need yet? That's fine.</h2>
-    <p>The first conversation is just that — a conversation. Tell me what you're working on and we'll figure out together whether a bespoke AI tool makes sense for you.</p>
+    <p>The first conversation is just that — a conversation. Tell me what you're working on and we'll figure out together whether a personalised AI tool makes sense for you.</p>
   </div>
   <div class="cta-actions">
     <a href="mailto:info@jennifersimonds.com" class="btn-dark">Get in touch →</a>
@@ -371,7 +412,7 @@
   <ul class="footer-links">
     <li><a href="./index.html">Career development</a></li>
     <li><a href="./coaches-landing.html">For coaches</a></li>
-    <li><a href="./ai-tools.html">Bespoke AI</a></li>
+    <li><a href="./ai-tools.html">Personalised AI tools</a></li>
     <li><a href="./imprint.html">Imprint</a></li>
     <li><a href="mailto:info@jennifersimonds.com">Contact</a></li>
   </ul>

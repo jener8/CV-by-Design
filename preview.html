@@ -40,12 +40,66 @@
     font-weight: 400; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s;
   }
   .nav-links a:hover { color: var(--ink); }
+  .nav-links a.nav-pillar {
+    color: #e8608a;
+    font-weight: 500;
+    text-transform: none;
+    letter-spacing: 0.01em;
+    font-size: 0.78rem;
+  }
+  .nav-links a.nav-pillar:hover { color: var(--ink); }
   .nav-cta {
     background: var(--ink) !important; color: var(--paper) !important;
     padding: 0.55rem 1.4rem; border-radius: 3px; font-weight: 500 !important;
     letter-spacing: 0.02em !important; text-transform: none !important; transition: background 0.2s !important;
   }
   .nav-cta:hover { background: var(--pink) !important; }
+  .hamburger {
+    display: flex; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px;
+  }
+  .hamburger span { display: block; width: 22px; height: 2px; background: var(--ink); border-radius: 2px; }
+  .mobile-menu {
+    position: absolute; top: 100%; left: 0; right: 0;
+    background: var(--paper); border-bottom: 1px solid var(--border);
+    padding: 0.5rem 2rem 1rem; flex-direction: column; z-index: 200; display: none;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.88rem; color: var(--muted); text-decoration: none;
+    padding: 0.85rem 0; border-bottom: 1px solid var(--border);
+    font-weight: 400; text-transform: uppercase; letter-spacing: 0.04em;
+  }
+  .mobile-menu a:last-child { border-bottom: none; }
+  .mobile-menu a.nav-pillar {
+    color: #e8608a;
+    font-weight: 500;
+    text-transform: none;
+    letter-spacing: 0.01em;
+    font-size: 0.78rem;
+  }
+  .mobile-menu a.nav-pillar:hover { color: var(--ink); }
+  .mobile-menu a.nav-cta-mobile {
+    background: var(--ink); color: var(--paper) !important;
+    padding: 0.65rem 1rem; border-radius: 3px; font-weight: 500 !important;
+    text-transform: none !important; letter-spacing: 0.02em !important;
+    font-size: 0.85rem !important; text-align: center; margin-top: 0.35rem;
+    border-bottom: none !important;
+  }
+  .mobile-menu a.nav-cta-mobile:hover { background: var(--pink) !important; color: var(--paper) !important; }
+  .nav-mobile-only { display: none !important; }
+  @media (max-width: 860px) {
+    nav { padding: 0.75rem 1rem; gap: 0.5rem; }
+    .nav-logo { flex: 1; min-width: 0; line-height: 1.2; }
+    .nav-links { gap: 0.35rem; flex-shrink: 0; }
+    .nav-links > li.nav-desktop-only { display: none !important; }
+    .nav-mobile-only { display: list-item !important; }
+    .hamburger {
+      min-width: 44px; min-height: 44px;
+      align-items: center; justify-content: center;
+      padding: 10px;
+    }
+  }
 
   .hero {
     min-height: 88vh; display: grid; grid-template-columns: 55% 45%; position: relative;
@@ -262,7 +316,6 @@
 
   @media (max-width: 1000px) {
     nav { padding: 1rem 1.5rem; }
-    .nav-links li:not(:last-child) { display: none; }
     .hero { grid-template-columns: 1fr; min-height: auto; }
     .hero-left { padding: 4rem 2rem; border-right: none; }
     .hero-right { padding: 3rem 2rem; min-height: 380px; }
@@ -283,18 +336,29 @@
   }
 </style>
 
-<nav>
+<nav style="position:relative;">
   <a class="nav-logo" href="#">CV by Design</a>
   <ul class="nav-links">
-    <li><a href="#who">Who it's for</a></li>
-    <li><a href="#process">The process</a></li>
-    <li><a href="#ai">About the AI</a></li>
-    <li><a href="#pricing">Pricing</a></li>
-    <li><a href="#about">About</a></li>
-    <li><a href="./coaches-landing.html">For coaches</a></li>
-    <li><a href="mailto:info@jennifersimonds.com" style="color:var(--ink);border:1px solid var(--border);padding:0.45rem 1rem;border-radius:3px;letter-spacing:0.01em !important;text-transform:none !important;">✉ info@jennifersimonds.com</a></li>
-    <li><a href="https://cvresume-vqtg.vercel.app/" target="_blank" class="nav-cta">Open the tool →</a></li>
+    <li class="nav-desktop-only"><a href="#who">Who it's for</a></li>
+    <li class="nav-desktop-only"><a href="#process">The process</a></li>
+    <li class="nav-desktop-only"><a href="#ai">About the AI</a></li>
+    <li class="nav-desktop-only"><a href="#pricing">Pricing</a></li>
+    <li class="nav-desktop-only"><a href="#about">About</a></li>
+    <li class="nav-desktop-only"><a class="nav-pillar" href="./coaches-landing.html">For coaches</a></li>
+    <li class="nav-desktop-only"><a href="mailto:info@jennifersimonds.com" style="color:var(--ink);border:1px solid var(--border);padding:0.45rem 1rem;border-radius:3px;letter-spacing:0.01em !important;text-transform:none !important;">✉ info@jennifersimonds.com</a></li>
+    <li class="nav-desktop-only"><a href="https://cvresume-vqtg.vercel.app/" target="_blank" class="nav-cta">Open the tool →</a></li>
+    <li class="nav-mobile-only"><button type="button" class="hamburger" onclick="document.getElementById('mobile-nav-preview').classList.toggle('open')" aria-label="Open menu" aria-controls="mobile-nav-preview"><span></span><span></span><span></span></button></li>
   </ul>
+  <div class="mobile-menu" id="mobile-nav-preview">
+    <a href="#who" onclick="document.getElementById('mobile-nav-preview').classList.remove('open')">Who it's for</a>
+    <a href="#process" onclick="document.getElementById('mobile-nav-preview').classList.remove('open')">The process</a>
+    <a href="#ai" onclick="document.getElementById('mobile-nav-preview').classList.remove('open')">About the AI</a>
+    <a href="#pricing" onclick="document.getElementById('mobile-nav-preview').classList.remove('open')">Pricing</a>
+    <a href="#about" onclick="document.getElementById('mobile-nav-preview').classList.remove('open')">About</a>
+    <a class="nav-pillar" href="./coaches-landing.html" onclick="document.getElementById('mobile-nav-preview').classList.remove('open')">For coaches</a>
+    <a href="mailto:info@jennifersimonds.com" onclick="document.getElementById('mobile-nav-preview').classList.remove('open')">✉ info@jennifersimonds.com</a>
+    <a href="https://cvresume-vqtg.vercel.app/" target="_blank" class="nav-cta-mobile" onclick="document.getElementById('mobile-nav-preview').classList.remove('open')">Open the tool →</a>
+  </div>
 </nav>
 
 <!-- HERO -->

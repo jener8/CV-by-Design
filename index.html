@@ -54,6 +54,14 @@
     font-weight: 400; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s;
   }
   .nav-links a:hover { color: var(--ink); }
+  .nav-links a.nav-pillar {
+    color: #e8608a;
+    font-weight: 500;
+    text-transform: none;
+    letter-spacing: 0.01em;
+    font-size: 0.78rem;
+  }
+  .nav-links a.nav-pillar:hover { color: var(--ink); }
   .nav-cta {
     background: var(--ink) !important; color: var(--paper) !important;
     padding: 0.5rem 1.1rem; border-radius: 3px; font-weight: 500 !important;
@@ -69,6 +77,38 @@
   .mobile-menu.open { display: flex; }
   .mobile-menu a { font-family: 'Instrument Sans', sans-serif; font-size: 0.88rem; color: var(--muted); text-decoration: none; padding: 0.85rem 0; border-bottom: 1px solid var(--border); font-weight: 400; text-transform: uppercase; letter-spacing: 0.04em; }
   .mobile-menu a:last-child { border-bottom: none; }
+  .mobile-menu a.nav-pillar {
+    color: #e8608a;
+    font-weight: 500;
+    text-transform: none;
+    letter-spacing: 0.01em;
+    font-size: 0.78rem;
+  }
+  .mobile-menu a.nav-pillar:hover { color: var(--ink); }
+  .mobile-menu a.nav-cta-mobile {
+    background: var(--ink); color: var(--paper) !important;
+    padding: 0.65rem 1rem; border-radius: 3px; font-weight: 500 !important;
+    text-transform: none !important; letter-spacing: 0.02em !important;
+    font-size: 0.85rem !important; text-align: center; margin-top: 0.35rem;
+    border-bottom: none !important;
+  }
+  .mobile-menu a.nav-cta-mobile:hover { background: var(--pink) !important; color: var(--paper) !important; }
+  .nav-mobile-only { display: none !important; }
+  @media (max-width: 860px) {
+    nav { padding: 0.75rem 1rem; gap: 0.5rem; }
+    .nav-logo { flex: 1; min-width: 0; line-height: 1.2; }
+    .nav-links { gap: 0.35rem; flex-shrink: 0; }
+    .nav-links > li.nav-desktop-only { display: none !important; }
+    .nav-mobile-only { display: list-item !important; }
+    .hamburger {
+      min-width: 44px; min-height: 44px;
+      align-items: center; justify-content: center;
+      padding: 10px;
+    }
+  }
+  @media (max-width: 420px) {
+    .nav-logo span { display: none; }
+  }
   .hero {
     min-height: 88vh; display: grid; grid-template-columns: 55% 45%; position: relative;
   }
@@ -219,10 +259,10 @@
     border: 1px solid var(--border); border-radius: 6px; background: var(--surface);
   }
 
-  .about-wrap { display: grid; grid-template-columns: 380px 1fr; gap: 6rem; align-items: start; }
-  .about-photo-col { position: sticky; top: 6rem; }
-  .about-photo-frame { position: relative; }
-  .about-photo-main { width: 100%; border-radius: 6px; display: block; object-fit: cover; aspect-ratio: 3/4; }
+  .about-wrap { display: grid; grid-template-columns: 380px 1fr; gap: 6rem; align-items: start; min-width: 0; }
+  .about-photo-col { position: sticky; top: 6rem; min-width: 0; max-width: 100%; }
+  .about-photo-frame { position: relative; max-width: 100%; overflow: hidden; border-radius: 6px; }
+  .about-photo-main { width: 100%; max-width: 100%; border-radius: 6px; display: block; object-fit: cover; aspect-ratio: 3/4; }
   .about-photo-badge {
     position: absolute; bottom: 1.5rem; left: 1.5rem; right: 1.5rem;
     background: rgba(17,18,16,0.88); backdrop-filter: blur(6px);
@@ -307,6 +347,14 @@
     font-weight: 400; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s;
   }
   .nav-links a:hover { color: var(--ink); }
+  .nav-links a.nav-pillar {
+    color: #e8608a;
+    font-weight: 500;
+    text-transform: none;
+    letter-spacing: 0.01em;
+    font-size: 0.78rem;
+  }
+  .nav-links a.nav-pillar:hover { color: var(--ink); }
   .nav-cta {
     background: var(--ink) !important; color: var(--paper) !important;
     padding: 0.5rem 1.1rem; border-radius: 3px; font-weight: 500 !important;
@@ -322,23 +370,160 @@
   .mobile-menu.open { display: flex; }
   .mobile-menu a { font-family: 'Instrument Sans', sans-serif; font-size: 0.88rem; color: var(--muted); text-decoration: none; padding: 0.85rem 0; border-bottom: 1px solid var(--border); font-weight: 400; text-transform: uppercase; letter-spacing: 0.04em; }
   .mobile-menu a:last-child { border-bottom: none; }
+  .mobile-menu a.nav-pillar {
+    color: #e8608a;
+    font-weight: 500;
+    text-transform: none;
+    letter-spacing: 0.01em;
+    font-size: 0.78rem;
+  }
+  .mobile-menu a.nav-pillar:hover { color: var(--ink); }
+  .mobile-menu a.nav-cta-mobile {
+    background: var(--ink); color: var(--paper) !important;
+    padding: 0.65rem 1rem; border-radius: 3px; font-weight: 500 !important;
+    text-transform: none !important; letter-spacing: 0.02em !important;
+    font-size: 0.85rem !important; text-align: center; margin-top: 0.35rem;
+    border-bottom: none !important;
+  }
+  .mobile-menu a.nav-cta-mobile:hover { background: var(--pink) !important; color: var(--paper) !important; }
+  .nav-mobile-only { display: none !important; }
+  @media (max-width: 860px) {
+    nav { padding: 0.75rem 1rem; gap: 0.5rem; }
+    .nav-logo { flex: 1; min-width: 0; line-height: 1.2; }
+    .nav-links { gap: 0.35rem; flex-shrink: 0; }
+    .nav-links > li.nav-desktop-only { display: none !important; }
+    .nav-mobile-only { display: list-item !important; }
+    .hamburger {
+      min-width: 44px; min-height: 44px;
+      align-items: center; justify-content: center;
+      padding: 10px;
+    }
+  }
+  @media (max-width: 420px) {
+    .nav-logo span { display: none; }
+  }
   .hero { grid-template-columns: 1fr; min-height: auto; }
     .hero-left { padding: 4rem 2rem; border-right: none; }
     .hero-right { padding: 3rem 2rem; min-height: 380px; }
-    .section { padding: 4rem 2rem; }
-    .audience-grid { grid-template-columns: 1fr 1fr; }
-    .audience-card:nth-child(2) { border-right: none; }
+    .section { padding: 4.75rem 1.5rem; }
+    .audience-grid { grid-template-columns: 1fr; }
+    .audience-card {
+      border-right: none;
+      border-bottom: 1px solid var(--border);
+      padding: 2rem 1.5rem;
+    }
+    .audience-card:last-child { border-bottom: none; }
     .process-grid { grid-template-columns: 1fr; }
     .ai-grid { grid-template-columns: 1fr; gap: 2.5rem; }
     .pricing-row { grid-template-columns: 1fr; }
-    .about-wrap { grid-template-columns: 1fr; gap: 2.5rem; }
-    .about-photo-col { position: static; }
-    .about-photo-main { aspect-ratio: 4/3; }
-    .cta-section { grid-template-columns: 1fr; padding: 4rem 2rem; }
+    .about-wrap { grid-template-columns: 1fr; gap: 2.5rem; width: 100%; max-width: 100%; }
+    .about-photo-col { position: static; width: 100%; max-width: 100%; min-width: 0; }
+    #about.section { overflow-x: hidden; }
+    .about-photo-frame {
+      width: 100%; max-width: 100%;
+      display: flex; flex-direction: column;
+      overflow: visible;
+      border-radius: 0;
+    }
+    .about-photo-main {
+      aspect-ratio: 3 / 4;
+      max-width: 100%;
+      border-radius: 6px 6px 0 0;
+      object-position: center top;
+    }
+    .about-photo-badge {
+      position: relative;
+      bottom: auto; left: auto; right: auto;
+      margin-top: 0;
+      border-radius: 0 0 6px 6px;
+      padding: 1rem 1.15rem;
+    }
+    .cta-section { grid-template-columns: 1fr; padding: 4.75rem 1.5rem; }
     .cta-actions { align-items: flex-start; }
-    .safety-bar { padding: 2rem; gap: 1rem; }
-    footer { padding: 1.5rem 2rem; flex-direction: column; text-align: center; gap: 0.75rem; }
+    .safety-bar { padding: 2.5rem 1.5rem; gap: 1.25rem; flex-direction: column; align-items: flex-start; }
+    .safety-divider { display: none; }
+    footer { padding: 2rem 1.5rem; flex-direction: column; text-align: center; gap: 0.75rem; }
     .footer-links { justify-content: center; }
+  }
+
+  /* Homepage dark hero + proof band — mobile readability */
+  .homepage-hero-lead {
+    position: relative; z-index: 2; text-align: center; padding: 5rem 5rem 0;
+  }
+  .homepage-hero-visual {
+    position: relative; z-index: 2; max-width: 960px; margin: 0 auto; padding: 0 3rem;
+  }
+  .homepage-proof-band {
+    position: relative; z-index: 2;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    display: grid;
+    grid-template-columns: 1fr 1px 1fr 1px 1fr;
+    max-width: 960px; margin: 0 auto;
+  }
+  .homepage-proof-cell { padding: 2rem 2.5rem; }
+  .homepage-proof-intro {
+    display: flex; gap: 1.25rem; align-items: center;
+  }
+  .homepage-proof-vdivider { background: rgba(255,255,255,0.08); }
+
+  @media (max-width: 768px) {
+    .homepage-hero-lead { padding: 2.75rem 1.5rem 0; }
+    .homepage-hero-visual { padding: 0 1.5rem; }
+    .homepage-hero-title {
+      font-size: clamp(2rem, 9vw, 3.25rem) !important;
+      line-height: 1.12 !important;
+    }
+    .homepage-hero-sub {
+      font-size: clamp(1rem, 4vw, 1.05rem) !important;
+      line-height: 1.55 !important;
+      max-width: none !important;
+      padding-left: 0; padding-right: 0;
+    }
+    .homepage-proof-num {
+      font-size: 1.85rem !important;
+      line-height: 1.1 !important;
+    }
+    .homepage-proof-copy {
+      font-size: 0.8rem !important;
+      line-height: 1.55 !important;
+    }
+    .homepage-proof-band {
+      grid-template-columns: 1fr;
+      max-width: none;
+    }
+    .homepage-proof-vdivider { display: none; }
+    .homepage-proof-cell {
+      padding: 1.5rem 1.5rem;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .homepage-proof-cell:last-child { border-bottom: none; }
+    .homepage-proof-intro { align-items: flex-start; }
+    .section-title {
+      font-size: clamp(1.45rem, 5.5vw, 2.1rem);
+      line-height: 1.2;
+      margin-bottom: 2.25rem;
+      max-width: none;
+    }
+    .section-kicker { letter-spacing: 0.12em; }
+    .audience-card h3 { font-size: 0.92rem; }
+    .audience-card p { font-size: 0.88rem; line-height: 1.55; }
+    .process-card p { line-height: 1.55; }
+    .process-card h3 { line-height: 1.25; }
+    .ai-left p { line-height: 1.55; }
+    .ai-fact-text p { line-height: 1.55; }
+    .about-text p { line-height: 1.55; }
+    .about-wrap { gap: 2rem; }
+    .pricing-footnote { line-height: 1.55; }
+    .cta-text h2 {
+      font-size: clamp(1.45rem, 5vw, 2rem);
+      line-height: 1.2;
+    }
+    .cta-text p { line-height: 1.55; max-width: none; }
+    .homepage-pricing-callout {
+      flex-direction: column;
+      padding: 1.35rem 1.25rem !important;
+      gap: 1rem !important;
+    }
   }
 
   .nav-hide { }
@@ -359,11 +544,11 @@
 <nav style="position:relative;">
   <a class="nav-logo" href="#">CV by Design <span>for career development</span></a>
   <ul class="nav-links">
-    <li><a href="./coaches-landing.html" style="color:var(--pink);font-weight:500;text-transform:none;letter-spacing:0.01em;">For coaches</a></li>
-    <li><a href="./ai-tools.html" style="color:var(--yellow);font-weight:500;text-transform:none;letter-spacing:0.01em;font-size:0.78rem;">Personalised AI tools</a></li>
-    <li><a href="mailto:info@jennifersimonds.com" style="color:var(--ink);border:1px solid var(--border);padding:0.4rem 0.85rem;border-radius:3px;letter-spacing:0.01em;text-transform:none;font-size:0.78rem;white-space:nowrap;">✉ info@jennifersimonds.com</a></li>
-    <li><a href="https://tool.cv-by-design.com/" target="_blank" class="nav-cta">Open the tool →</a></li>
-    <li><button class="hamburger" onclick="document.getElementById('mobile-nav').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button></li>
+    <li class="nav-desktop-only"><a class="nav-pillar" href="./coaches-landing.html">For coaches</a></li>
+    <li class="nav-desktop-only"><a class="nav-pillar" href="./ai-tools.html">Personalised AI tools</a></li>
+    <li class="nav-desktop-only"><a href="mailto:info@jennifersimonds.com" style="color:var(--ink);border:1px solid var(--border);padding:0.4rem 0.85rem;border-radius:3px;letter-spacing:0.01em;text-transform:none;font-size:0.78rem;white-space:nowrap;">✉ info@jennifersimonds.com</a></li>
+    <li class="nav-desktop-only"><a href="https://tool.cv-by-design.com/" target="_blank" class="nav-cta">Open the tool →</a></li>
+    <li class="nav-mobile-only"><button type="button" class="hamburger" onclick="document.getElementById('mobile-nav').classList.toggle('open')" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-nav"><span></span><span></span><span></span></button></li>
   </ul>
   <div class="mobile-menu" id="mobile-nav">
     <a href="#who" onclick="document.getElementById('mobile-nav').classList.remove('open')">Who it's for</a>
@@ -371,8 +556,10 @@
     <a href="#ai" onclick="document.getElementById('mobile-nav').classList.remove('open')">About the AI</a>
     <a href="#pricing" onclick="document.getElementById('mobile-nav').classList.remove('open')">Pricing</a>
     <a href="#about" onclick="document.getElementById('mobile-nav').classList.remove('open')">About</a>
-    <a href="./ai-tools.html">Bespoke AI tools</a>
-    <a href="mailto:info@jennifersimonds.com">✉ info@jennifersimonds.com</a>
+    <a class="nav-pillar" href="./coaches-landing.html" onclick="document.getElementById('mobile-nav').classList.remove('open')">For coaches</a>
+    <a class="nav-pillar" href="./ai-tools.html" onclick="document.getElementById('mobile-nav').classList.remove('open')">Personalised AI tools</a>
+    <a href="mailto:info@jennifersimonds.com" onclick="document.getElementById('mobile-nav').classList.remove('open')">✉ info@jennifersimonds.com</a>
+    <a href="https://tool.cv-by-design.com/" target="_blank" class="nav-cta-mobile" onclick="document.getElementById('mobile-nav').classList.remove('open')">Open the tool →</a>
   </div>
 </nav>
 
@@ -382,15 +569,15 @@
   <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 80% 10%, rgba(240,212,74,0.06) 0%, transparent 55%),radial-gradient(ellipse at 10% 90%, rgba(232,96,138,0.05) 0%, transparent 50%);pointer-events:none;"></div>
 
   <!-- TOP: headline + CV image -->
-  <div style="position:relative;z-index:2;text-align:center;padding:5rem 5rem 0;">
+  <div class="homepage-hero-lead">
     <p style="font-size:0.74rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#888;margin-bottom:1.5rem;">Career Coaching · Personal AI Tools for Job Hunting · Berlin</p>
-    <h1 style="font-family:'Playfair Display',serif;font-size:clamp(2.6rem,5vw,4.5rem);line-height:1.05;letter-spacing:-0.025em;color:white;margin-bottom:0.4rem;">
+    <h1 class="homepage-hero-title" style="font-family:'Playfair Display',serif;font-size:clamp(2.6rem,5vw,4.5rem);line-height:1.05;letter-spacing:-0.025em;color:white;margin-bottom:0.4rem;">
       One profile.
     </h1>
-    <h1 style="font-family:'Playfair Display',serif;font-size:clamp(2.6rem,5vw,4.5rem);line-height:1.05;letter-spacing:-0.025em;color:#f0d44a;font-style:italic;margin-bottom:1.75rem;">
+    <h1 class="homepage-hero-title" style="font-family:'Playfair Display',serif;font-size:clamp(2.6rem,5vw,4.5rem);line-height:1.05;letter-spacing:-0.025em;color:#f0d44a;font-style:italic;margin-bottom:1.75rem;">
       Multiple powerful CVs.
     </h1>
-    <p style="font-size:1rem;color:#aaaaaa;max-width:540px;margin:0 auto 1.5rem;line-height:1.75;font-weight:300;">
+    <p class="homepage-hero-sub" style="font-size:1rem;color:#aaaaaa;max-width:540px;margin:0 auto 1.5rem;line-height:1.75;font-weight:300;">
       Individual coaching and personal AI tools for job hunting — including a CV builder
       <mark style="background:#f0d44a;color:#111210;padding:0 0.2em;border-radius:2px;font-weight:500;">proved to be successful.</mark>
     </p>
@@ -401,30 +588,30 @@
   </div>
 
   <!-- CV IMAGE -->
-  <div style="position:relative;z-index:2;max-width:960px;margin:0 auto;padding:0 3rem;">
+  <div class="homepage-hero-visual">
     <div style="border-radius:10px 10px 0 0;overflow:hidden;box-shadow:0 -4px 40px rgba(0,0,0,0.4),0 0 0 1px rgba(255,255,255,0.07);">
       <img src="./cvimage.png" alt="CV template examples" style="width:100%;display:block;" />
     </div>
   </div>
 
   <!-- PROOF BAND -->
-  <div style="position:relative;z-index:2;border-top:1px solid rgba(255,255,255,0.08);display:grid;grid-template-columns:1fr 1px 1fr 1px 1fr;max-width:960px;margin:0 auto;">
-    <div style="padding:2rem 2.5rem;display:flex;gap:1.25rem;align-items:center;">
+  <div class="homepage-proof-band">
+    <div class="homepage-proof-cell homepage-proof-intro">
       <img src="./jenny-photo.png" alt="Jennifer Simonds" style="width:52px;height:52px;border-radius:50%;object-fit:cover;border:1.5px solid rgba(255,255,255,0.15);flex-shrink:0;" />
-      <div>
+      <div style="min-width:0;">
         <div style="font-family:'Playfair Display',serif;font-size:1rem;color:white;margin-bottom:0.2rem;">Jennifer Simonds</div>
-        <div style="font-size:0.75rem;color:#888;line-height:1.5;">UX & AI Design Leader · Career Coach<br>Berlin · English & German</div>
+        <div class="homepage-proof-copy" style="font-size:0.75rem;color:#888;line-height:1.5;">UX & AI Design Leader · Career Coach<br>Berlin · English & German</div>
       </div>
     </div>
-    <div style="background:rgba(255,255,255,0.08);"></div>
-    <div style="padding:2rem 2.5rem;">
-      <div style="font-family:'Playfair Display',serif;font-size:2.2rem;color:#f0d44a;line-height:1;margin-bottom:0.4rem;">1 in 5</div>
-      <div style="font-size:0.78rem;color:#888;line-height:1.55;">resumes built this way lead to an interview — validated through real client outcomes</div>
+    <div class="homepage-proof-vdivider" aria-hidden="true"></div>
+    <div class="homepage-proof-cell">
+      <div class="homepage-proof-num" style="font-family:'Playfair Display',serif;font-size:2.2rem;color:#f0d44a;line-height:1;margin-bottom:0.4rem;">1 in 5</div>
+      <div class="homepage-proof-copy" style="font-size:0.78rem;color:#888;line-height:1.55;">resumes built this way lead to an interview — validated through real client outcomes</div>
     </div>
-    <div style="background:rgba(255,255,255,0.08);"></div>
-    <div style="padding:2rem 2.5rem;">
-      <div style="font-family:'Playfair Display',serif;font-size:2.2rem;color:#e8608a;line-height:1;margin-bottom:0.4rem;">Minutes</div>
-      <div style="font-size:0.78rem;color:#888;line-height:1.55;">to a polished, tailored CV — freeing your time for the search itself</div>
+    <div class="homepage-proof-vdivider" aria-hidden="true"></div>
+    <div class="homepage-proof-cell">
+      <div class="homepage-proof-num" style="font-family:'Playfair Display',serif;font-size:2.2rem;color:#e8608a;line-height:1;margin-bottom:0.4rem;">Minutes</div>
+      <div class="homepage-proof-copy" style="font-size:0.78rem;color:#888;line-height:1.55;">to a polished, tailored CV — freeing your time for the search itself</div>
     </div>
   </div>
 
@@ -540,7 +727,7 @@
   <p class="section-kicker">Pricing</p>
   <h2 class="section-title">Clear, flexible options</h2>
 
-  <div style="background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:1.5rem 2rem;margin-bottom:2rem;display:flex;gap:1.25rem;align-items:flex-start;">
+  <div class="homepage-pricing-callout" style="background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:1.5rem 2rem;margin-bottom:2rem;display:flex;gap:1.25rem;align-items:flex-start;">
     <div style="width:8px;height:8px;border-radius:50%;background:var(--cyan);margin-top:6px;flex-shrink:0;"></div>
     <div>
       <p style="font-size:0.88rem;font-weight:500;color:var(--ink);margin-bottom:0.3rem;">A note on how I'd suggest thinking about this</p>
@@ -672,7 +859,7 @@
     <li><a href="./coaches-landing.html">For coaches</a></li>
     <li><a href="https://tool.cv-by-design.com/" target="_blank">CV Tool</a></li>
     <li><a href="mailto:info@jennifersimonds.com">Contact</a></li>
-    <li><a href="./ai-tools.html">Bespoke AI</a></li>
+    <li><a href="./ai-tools.html">Personalised AI tools</a></li>
     <li><a href="./imprint.html">Imprint</a></li>
   </ul>
   <span class="footer-copy">© 2026 Jennifer Simonds · Berlin · Your data is always safe.</span>
