@@ -42,51 +42,33 @@
     font-family: 'Playfair Display', serif;
     font-size: 1.15rem; color: var(--ink); text-decoration: none; letter-spacing: -0.01em;
   }
+  .nav-logo span {
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.88rem; font-weight: 300; color: var(--muted-light);
+    margin-left: 0.4rem; letter-spacing: 0;
+  }
   .nav-links { display: flex; gap: 1.5rem; list-style: none; align-items: center; }
   .nav-links a {
+    font-family: 'Instrument Sans', sans-serif;
     font-size: 0.78rem; color: var(--muted); text-decoration: none;
     font-weight: 400; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s;
   }
   .nav-links a:hover { color: var(--ink); }
-  .nav-hide { }
-  .nav-email {
-    color: var(--ink) !important; border: 1px solid var(--border);
-    padding: 0.4rem 0.85rem !important; border-radius: 3px;
-    letter-spacing: 0.01em !important; text-transform: none !important;
-    font-size: 0.78rem !important; white-space: nowrap;
-  }
   .nav-cta {
     background: var(--ink) !important; color: var(--paper) !important;
     padding: 0.5rem 1.1rem; border-radius: 3px; font-weight: 500 !important;
     letter-spacing: 0.02em !important; text-transform: none !important;
-    transition: background 0.2s !important; white-space: nowrap;
+    font-size: 0.78rem !important; transition: background 0.2s !important; white-space: nowrap;
   }
   .nav-cta:hover { background: var(--pink) !important; }
   .nav-hide { }
   @media (max-width: 860px) { .nav-hide { display: none !important; } }
-  .hamburger {
-    display: none; flex-direction: column; gap: 5px; cursor: pointer;
-    background: none; border: none; padding: 4px; margin-left: auto;
-  }
-  .hamburger span { display: block; width: 22px; height: 2px; background: var(--ink); border-radius: 2px; transition: 0.2s; }
-  .mobile-menu {
-    position: absolute; top: 100%; left: 0; right: 0;
-    background: var(--paper); border-bottom: 1px solid var(--border);
-    padding: 0.5rem 2rem 1rem; flex-direction: column; z-index: 200;
-    display: none;
-  }
+  .hamburger { display: flex; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+  .hamburger span { display: block; width: 22px; height: 2px; background: var(--ink); border-radius: 2px; }
+  .mobile-menu { position: absolute; top: 100%; left: 0; right: 0; background: var(--paper); border-bottom: 1px solid var(--border); padding: 0.5rem 2rem 1rem; flex-direction: column; z-index: 200; display: none; }
   .mobile-menu.open { display: flex; }
-  .mobile-menu a {
-    font-size: 0.88rem; color: var(--muted); text-decoration: none;
-    padding: 0.85rem 0; border-bottom: 1px solid var(--border);
-    font-weight: 400; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s;
-  }
+  .mobile-menu a { font-family: 'Instrument Sans', sans-serif; font-size: 0.88rem; color: var(--muted); text-decoration: none; padding: 0.85rem 0; border-bottom: 1px solid var(--border); font-weight: 400; text-transform: uppercase; letter-spacing: 0.04em; }
   .mobile-menu a:last-child { border-bottom: none; }
-  .mobile-menu a:hover { color: var(--ink); }
-  @media (max-width: 1100px) {
-    .nav-hide { display: none !important; }
-  }
-
   .hero {
     min-height: 88vh; display: grid; grid-template-columns: 55% 45%; position: relative;
   }
@@ -123,7 +105,7 @@
 
   .hero-right {
     background: var(--ink); display: flex; flex-direction: column;
-    justify-content: flex-end; padding: 3.5rem; position: relative; overflow: hidden;
+    justify-content: flex-end; padding: 0 0 3.5rem; position: relative; overflow: hidden;
   }
   .hero-right-bg {
     position: absolute; inset: 0;
@@ -132,7 +114,7 @@
   }
   .hero-photo-block {
     position: relative; z-index: 2; margin-bottom: 3rem;
-    display: flex; align-items: center; gap: 1.5rem;
+    display: flex; align-items: center; gap: 1.5rem; padding: 0 3.5rem;
   }
   .hero-photo {
     width: 90px; height: 90px; border-radius: 50%; object-fit: cover;
@@ -144,9 +126,9 @@
   }
   .hero-intro-role { font-size: 0.8rem; color: rgba(255,255,255,0.4); font-weight: 300; line-height: 1.5; }
 
-  .hero-divider { height: 1px; background: rgba(255,255,255,0.1); margin-bottom: 2.5rem; position: relative; z-index: 2; }
+  .hero-divider { height: 1px; background: rgba(255,255,255,0.1); margin-bottom: 2.5rem; position: relative; z-index: 2; margin: 0 3.5rem 2.5rem; }
 
-  .proof-row { position: relative; z-index: 2; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .proof-row { position: relative; z-index: 2; display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; padding: 0 3.5rem; }
   .proof-number {
     font-family: 'Playfair Display', serif; font-size: 2.2rem; color: var(--yellow);
     line-height: 1; margin-bottom: 0.4rem;
@@ -301,9 +283,46 @@
   .footer-copy { font-size: 0.75rem; color: rgba(255,255,255,0.25); }
 
   @media (max-width: 1000px) {
-    nav { padding: 1rem 1.5rem; }
-    .nav-links li:not(:last-child) { display: none; }
-    .hero { grid-template-columns: 1fr; min-height: auto; }
+    nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(247,245,240,0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    padding: 1.1rem 3rem;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem; color: var(--ink); text-decoration: none; letter-spacing: -0.01em;
+  }
+  .nav-logo span {
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.88rem; font-weight: 300; color: var(--muted-light);
+    margin-left: 0.4rem; letter-spacing: 0;
+  }
+  .nav-links { display: flex; gap: 1.5rem; list-style: none; align-items: center; }
+  .nav-links a {
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.78rem; color: var(--muted); text-decoration: none;
+    font-weight: 400; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-cta {
+    background: var(--ink) !important; color: var(--paper) !important;
+    padding: 0.5rem 1.1rem; border-radius: 3px; font-weight: 500 !important;
+    letter-spacing: 0.02em !important; text-transform: none !important;
+    font-size: 0.78rem !important; transition: background 0.2s !important; white-space: nowrap;
+  }
+  .nav-cta:hover { background: var(--pink) !important; }
+  .nav-hide { }
+  @media (max-width: 860px) { .nav-hide { display: none !important; } }
+  .hamburger { display: flex; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+  .hamburger span { display: block; width: 22px; height: 2px; background: var(--ink); border-radius: 2px; }
+  .mobile-menu { position: absolute; top: 100%; left: 0; right: 0; background: var(--paper); border-bottom: 1px solid var(--border); padding: 0.5rem 2rem 1rem; flex-direction: column; z-index: 200; display: none; }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a { font-family: 'Instrument Sans', sans-serif; font-size: 0.88rem; color: var(--muted); text-decoration: none; padding: 0.85rem 0; border-bottom: 1px solid var(--border); font-weight: 400; text-transform: uppercase; letter-spacing: 0.04em; }
+  .mobile-menu a:last-child { border-bottom: none; }
+  .hero { grid-template-columns: 1fr; min-height: auto; }
     .hero-left { padding: 4rem 2rem; border-right: none; }
     .hero-right { padding: 3rem 2rem; min-height: 380px; }
     .section { padding: 4rem 2rem; }
@@ -338,9 +357,10 @@
 <body>
 
 <nav style="position:relative;">
-  <a class="nav-logo" href="#">CV by Design</a>
+  <a class="nav-logo" href="#">CV by Design <span>for career development</span></a>
   <ul class="nav-links">
     <li><a href="./coaches-landing.html" style="color:var(--pink);font-weight:500;text-transform:none;letter-spacing:0.01em;">For coaches</a></li>
+    <li><a href="./ai-tools.html" style="color:var(--yellow);font-weight:500;text-transform:none;letter-spacing:0.01em;font-size:0.78rem;">Personalised AI tools</a></li>
     <li><a href="mailto:info@jennifersimonds.com" style="color:var(--ink);border:1px solid var(--border);padding:0.4rem 0.85rem;border-radius:3px;letter-spacing:0.01em;text-transform:none;font-size:0.78rem;white-space:nowrap;">✉ info@jennifersimonds.com</a></li>
     <li><a href="https://tool.cv-by-design.com/" target="_blank" class="nav-cta">Open the tool →</a></li>
     <li><button class="hamburger" onclick="document.getElementById('mobile-nav').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button></li>
@@ -351,49 +371,63 @@
     <a href="#ai" onclick="document.getElementById('mobile-nav').classList.remove('open')">About the AI</a>
     <a href="#pricing" onclick="document.getElementById('mobile-nav').classList.remove('open')">Pricing</a>
     <a href="#about" onclick="document.getElementById('mobile-nav').classList.remove('open')">About</a>
+    <a href="./ai-tools.html">Bespoke AI tools</a>
     <a href="mailto:info@jennifersimonds.com">✉ info@jennifersimonds.com</a>
   </div>
 </nav>
 
 <!-- HERO -->
-<section class="hero" style="padding: 0;">
-  <div class="hero-left">
-    <p class="hero-kicker">Career Coaching · Personal AI Tools for Job Hunting · Berlin</p>
-    <h1 class="hero-title">
-      Individual coaching<br>and personal AI tools<br>for <em>job hunting.</em>
+<section style="background:#111210;padding:0;overflow:hidden;position:relative;">
+
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 80% 10%, rgba(240,212,74,0.06) 0%, transparent 55%),radial-gradient(ellipse at 10% 90%, rgba(232,96,138,0.05) 0%, transparent 50%);pointer-events:none;"></div>
+
+  <!-- TOP: headline + CV image -->
+  <div style="position:relative;z-index:2;text-align:center;padding:5rem 5rem 0;">
+    <p style="font-size:0.74rem;font-weight:500;letter-spacing:0.14em;text-transform:uppercase;color:#888;margin-bottom:1.5rem;">Career Coaching · Personal AI Tools for Job Hunting · Berlin</p>
+    <h1 style="font-family:'Playfair Display',serif;font-size:clamp(2.6rem,5vw,4.5rem);line-height:1.05;letter-spacing:-0.025em;color:white;margin-bottom:0.4rem;">
+      One profile.
     </h1>
-    <p class="hero-body">
-      Including a CV builder <mark style="background:var(--yellow);color:var(--ink);padding:0 0.2em;border-radius:2px;font-weight:500;">proved to be successful.</mark> Senior professionals across every industry —
-      stop spending weeks on applications that don't land. Expert coaching combined with AI tools
-      built around you, not the other way around.
+    <h1 style="font-family:'Playfair Display',serif;font-size:clamp(2.6rem,5vw,4.5rem);line-height:1.05;letter-spacing:-0.025em;color:#f0d44a;font-style:italic;margin-bottom:1.75rem;">
+      Multiple powerful CVs.
+    </h1>
+    <p style="font-size:1rem;color:#aaaaaa;max-width:540px;margin:0 auto 1.5rem;line-height:1.75;font-weight:300;">
+      Individual coaching and personal AI tools for job hunting — including a CV builder
+      <mark style="background:#f0d44a;color:#111210;padding:0 0.2em;border-radius:2px;font-weight:500;">proved to be successful.</mark>
     </p>
-    <div class="hero-actions">
-      <a href="https://tool.cv-by-design.com/" target="_blank" class="btn-primary">Try the CV tool →</a>
-      <a href="#process" class="btn-ghost">See how it works</a>
+    <div style="display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin-bottom:3rem;">
+      <a href="https://tool.cv-by-design.com/" target="_blank" style="background:#f0d44a;color:#111210;padding:0.85rem 2rem;border-radius:3px;font-size:0.9rem;font-weight:500;text-decoration:none;transition:opacity 0.2s;letter-spacing:0.02em;">Try the CV tool →</a>
+      <a href="#process" style="color:#aaaaaa;font-size:0.9rem;text-decoration:none;border-bottom:1px solid #444;padding-bottom:1px;align-self:center;">See how it works</a>
     </div>
   </div>
 
-  <div class="hero-right">
-    <div class="hero-right-bg"></div>
-    <div class="hero-photo-block">
-      <img src="./jenny-photo.png" alt="Jennifer Simonds" class="hero-photo" />
-      <div>
-        <div class="hero-intro-name">Jennifer Simonds</div>
-        <div class="hero-intro-role">UX & AI Design Leader · Career Coach<br>Berlin · English & German</div>
-      </div>
-    </div>
-    <div class="hero-divider"></div>
-    <div class="proof-row">
-      <div>
-        <div class="proof-number">1 in 5</div>
-        <div class="proof-label">resumes built this way lead to an interview — validated through real client outcomes and user testing</div>
-      </div>
-      <div>
-        <div class="proof-number" style="color: var(--pink);">Minutes</div>
-        <div class="proof-label">to a polished, tailored CV — freeing your time for conversations that matter</div>
-      </div>
+  <!-- CV IMAGE -->
+  <div style="position:relative;z-index:2;max-width:960px;margin:0 auto;padding:0 3rem;">
+    <div style="border-radius:10px 10px 0 0;overflow:hidden;box-shadow:0 -4px 40px rgba(0,0,0,0.4),0 0 0 1px rgba(255,255,255,0.07);">
+      <img src="./cvimage.png" alt="CV template examples" style="width:100%;display:block;" />
     </div>
   </div>
+
+  <!-- PROOF BAND -->
+  <div style="position:relative;z-index:2;border-top:1px solid rgba(255,255,255,0.08);display:grid;grid-template-columns:1fr 1px 1fr 1px 1fr;max-width:960px;margin:0 auto;">
+    <div style="padding:2rem 2.5rem;display:flex;gap:1.25rem;align-items:center;">
+      <img src="./jenny-photo.png" alt="Jennifer Simonds" style="width:52px;height:52px;border-radius:50%;object-fit:cover;border:1.5px solid rgba(255,255,255,0.15);flex-shrink:0;" />
+      <div>
+        <div style="font-family:'Playfair Display',serif;font-size:1rem;color:white;margin-bottom:0.2rem;">Jennifer Simonds</div>
+        <div style="font-size:0.75rem;color:#888;line-height:1.5;">UX & AI Design Leader · Career Coach<br>Berlin · English & German</div>
+      </div>
+    </div>
+    <div style="background:rgba(255,255,255,0.08);"></div>
+    <div style="padding:2rem 2.5rem;">
+      <div style="font-family:'Playfair Display',serif;font-size:2.2rem;color:#f0d44a;line-height:1;margin-bottom:0.4rem;">1 in 5</div>
+      <div style="font-size:0.78rem;color:#888;line-height:1.55;">resumes built this way lead to an interview — validated through real client outcomes</div>
+    </div>
+    <div style="background:rgba(255,255,255,0.08);"></div>
+    <div style="padding:2rem 2.5rem;">
+      <div style="font-family:'Playfair Display',serif;font-size:2.2rem;color:#e8608a;line-height:1;margin-bottom:0.4rem;">Minutes</div>
+      <div style="font-size:0.78rem;color:#888;line-height:1.55;">to a polished, tailored CV — freeing your time for the search itself</div>
+    </div>
+  </div>
+
 </section>
 
 <!-- WHO IT'S FOR -->
@@ -562,61 +596,6 @@
   <p class="pricing-footnote">Prices can always be discussed — reach out and we'll find an arrangement that works for where you are in your search.</p>
 </section>
 
-<!-- CV SHOWCASE -->
-<section style="background:#111210;padding:6rem 5rem;overflow:hidden;position:relative;">
-  <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 60% 0%, rgba(240,212,74,0.07) 0%, transparent 55%), radial-gradient(ellipse at 20% 100%, rgba(232,96,138,0.05) 0%, transparent 50%);pointer-events:none;"></div>
-
-  <div style="position:relative;z-index:2;text-align:center;margin-bottom:3.5rem;">
-    <div style="display:inline-flex;align-items:center;gap:0.6rem;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:100px;padding:0.4rem 1.1rem;margin-bottom:2rem;">
-      <span style="font-size:0.72rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:#aaaaaa;">Multiple CV formats</span>
-    </div>
-    <h2 style="font-family:'Playfair Display',serif;font-size:clamp(2.2rem,4vw,3.5rem);line-height:1.1;letter-spacing:-0.02em;color:white;margin-bottom:0.6rem;">
-      One profile.
-    </h2>
-    <h2 style="font-family:'Playfair Display',serif;font-size:clamp(2.2rem,4vw,3.5rem);line-height:1.1;letter-spacing:-0.02em;color:var(--yellow);margin-bottom:1.5rem;font-style:italic;">
-      Multiple powerful CVs.
-    </h2>
-    <p style="font-size:1rem;color:#cccccc;max-width:480px;margin:0 auto 2.5rem;line-height:1.7;font-weight:300;">
-      The tool generates polished, tailored CVs in minutes — different formats for different roles, all from a single profile built with your coach.
-    </p>
-
-    <div style="display:flex;justify-content:center;flex-wrap:wrap;gap:2rem;margin-bottom:3.5rem;">
-      <div style="display:flex;align-items:center;gap:0.5rem;font-size:0.82rem;color:#aaaaaa;">
-        <span style="color:var(--yellow);">✦</span> ATS-friendly layouts
-      </div>
-      <div style="display:flex;align-items:center;gap:0.5rem;font-size:0.82rem;color:#aaaaaa;">
-        <span style="color:var(--pink);">✦</span> Modern professional designs
-      </div>
-      <div style="display:flex;align-items:center;gap:0.5rem;font-size:0.82rem;color:#aaaaaa;">
-        <span style="color:var(--cyan);">✦</span> Built in minutes
-      </div>
-      <div style="display:flex;align-items:center;gap:0.5rem;font-size:0.82rem;color:#aaaaaa;">
-        <span style="color:var(--yellow);">✦</span> Fully tailored to you
-      </div>
-    </div>
-  </div>
-
-  <div style="position:relative;z-index:2;max-width:900px;margin:0 auto;">
-    <div style="border-radius:12px;overflow:hidden;box-shadow:0 40px 80px rgba(0,0,0,0.5),0 0 0 1px rgba(255,255,255,0.06);">
-      <img src="./cvimage.png" alt="CV template examples generated by the tool" style="width:100%;display:block;" />
-    </div>
-  </div>
-
-  <div style="position:relative;z-index:2;display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:900px;margin:3rem auto 0;">
-    <div style="padding:1.5rem;border:1px solid rgba(255,255,255,0.12);border-radius:6px;background:#1a1f1e;">
-      <div style="font-size:0.75rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:#3dcfb8;margin-bottom:0.6rem;">Professional layouts</div>
-      <p style="font-size:0.82rem;color:#cccccc;line-height:1.65;">Stand out with modern, employer-ready CV designs that reflect your seniority.</p>
-    </div>
-    <div style="padding:1.5rem;border:1px solid rgba(255,255,255,0.12);border-radius:6px;background:#1a1f1e;">
-      <div style="font-size:0.75rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:#f0d44a;margin-bottom:0.6rem;">Quick & easy</div>
-      <p style="font-size:0.82rem;color:#cccccc;line-height:1.65;">Create and customise a tailored CV in minutes — then apply more, stress less.</p>
-    </div>
-    <div style="padding:1.5rem;border:1px solid rgba(255,255,255,0.12);border-radius:6px;background:#1a1f1e;">
-      <div style="font-size:0.75rem;font-weight:500;letter-spacing:0.1em;text-transform:uppercase;color:#e8608a;margin-bottom:0.6rem;">Made for you</div>
-      <p style="font-size:0.82rem;color:#cccccc;line-height:1.65;">Tailored to highlight your specific strengths, experience, and the role you're targeting.</p>
-    </div>
-  </div>
-</section>
 
 <!-- ABOUT -->
 <section class="section" id="about" style="background:var(--surface);border-top:1px solid var(--border);">
@@ -693,6 +672,7 @@
     <li><a href="./coaches-landing.html">For coaches</a></li>
     <li><a href="https://tool.cv-by-design.com/" target="_blank">CV Tool</a></li>
     <li><a href="mailto:info@jennifersimonds.com">Contact</a></li>
+    <li><a href="./ai-tools.html">Bespoke AI</a></li>
     <li><a href="./imprint.html">Imprint</a></li>
   </ul>
   <span class="footer-copy">© 2026 Jennifer Simonds · Berlin · Your data is always safe.</span>

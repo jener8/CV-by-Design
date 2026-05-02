@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bespoke AI Tools — CV by Design</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400&family=Instrument+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --ink: #111210; --paper: #f7f5f0; --white: #ffffff;
+    --yellow: #f0d44a; --pink: #e8608a; --cyan: #3dcfb8;
+    --muted: #7a786e; --muted-light: #a8a69e; --border: #e2ddd6; --surface: #f0ede6;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Instrument Sans', sans-serif; background: var(--paper); color: var(--ink); font-size: 16px; line-height: 1.65; overflow-x: hidden; }
+
+  nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(247,245,240,0.95); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    padding: 1.1rem 3rem; display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.15rem; color: var(--ink); text-decoration: none; letter-spacing: -0.01em; }
+  .nav-logo span { font-family: 'Instrument Sans', sans-serif; font-size: 0.88rem; font-weight: 300; color: var(--muted-light); margin-left: 0.4rem; letter-spacing: 0; }
+  .nav-links { display: flex; gap: 1.5rem; list-style: none; align-items: center; }
+  .nav-links a { font-family: 'Instrument Sans', sans-serif; font-size: 0.78rem; color: var(--muted); text-decoration: none; font-weight: 400; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-active { color: var(--yellow) !important; border-bottom: 2px solid var(--yellow); padding-bottom: 2px; }
+  .nav-cta { background: var(--ink) !important; color: var(--paper) !important; padding: 0.5rem 1.1rem; border-radius: 3px; font-weight: 500 !important; letter-spacing: 0.02em !important; text-transform: none !important; font-size: 0.78rem !important; transition: background 0.2s !important; white-space: nowrap; }
+  .nav-cta:hover { background: var(--pink) !important; }
+  .hamburger { display: flex; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+  .hamburger span { display: block; width: 22px; height: 2px; background: var(--ink); border-radius: 2px; }
+  .mobile-menu { position: absolute; top: 100%; left: 0; right: 0; background: var(--paper); border-bottom: 1px solid var(--border); padding: 0.5rem 2rem 1rem; flex-direction: column; z-index: 200; display: none; }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a { font-family: 'Instrument Sans', sans-serif; font-size: 0.88rem; color: var(--muted); text-decoration: none; padding: 0.85rem 0; border-bottom: 1px solid var(--border); font-weight: 400; text-transform: uppercase; letter-spacing: 0.04em; }
+  .mobile-menu a:last-child { border-bottom: none; }
+
+  /* HERO */
+  .hero { background: #111210; padding: 7rem 5rem 6rem; position: relative; overflow: hidden; }
+  .hero-glow { position: absolute; inset: 0; background: radial-gradient(ellipse at 90% 20%, rgba(240,212,74,0.08) 0%, transparent 55%), radial-gradient(ellipse at 10% 80%, rgba(61,207,184,0.05) 0%, transparent 50%); pointer-events: none; }
+  .hero-inner { position: relative; z-index: 2; max-width: 720px; }
+  .hero-kicker { font-size: 0.74rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--yellow); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem; }
+  .hero-kicker::before { content: ''; display: block; width: 1.5rem; height: 1px; background: var(--yellow); }
+  .hero-title { font-family: 'Playfair Display', serif; font-size: clamp(2.8rem, 5vw, 4.2rem); line-height: 1.08; color: white; margin-bottom: 1.75rem; letter-spacing: -0.02em; }
+  .hero-title em { font-style: italic; color: var(--yellow); }
+  .hero-body { font-size: 1.05rem; color: rgba(255,255,255,0.55); max-width: 560px; margin-bottom: 2.5rem; line-height: 1.8; font-weight: 300; }
+  .hero-actions { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+  .btn-yellow { background: var(--yellow); color: var(--ink); padding: 0.9rem 2.25rem; border-radius: 3px; font-size: 0.9rem; font-weight: 500; text-decoration: none; transition: opacity 0.2s, transform 0.15s; letter-spacing: 0.02em; }
+  .btn-yellow:hover { opacity: 0.88; transform: translateY(-1px); }
+  .btn-ghost-light { color: rgba(255,255,255,0.45); font-size: 0.85rem; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 1px; transition: color 0.2s; }
+  .btn-ghost-light:hover { color: white; }
+
+  /* USE CASES */
+  .section { padding: 6rem 5rem; }
+  .section-kicker { font-size: 0.74rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted-light); margin-bottom: 1rem; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3vw, 2.5rem); line-height: 1.15; letter-spacing: -0.02em; max-width: 640px; margin-bottom: 3rem; color: var(--ink); }
+
+  .use-cases { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .use-card { padding: 2.5rem 2rem; border: 1px solid var(--border); border-radius: 6px; background: var(--white); }
+  .use-card.dark { background: #111210; border-color: #111210; }
+  .use-icon { font-size: 1.4rem; margin-bottom: 1.25rem; width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border); background: var(--surface); }
+  .use-card.dark .use-icon { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.1); }
+  .use-card h3 { font-size: 1rem; font-weight: 500; margin-bottom: 0.6rem; color: var(--ink); }
+  .use-card.dark h3 { color: white; }
+  .use-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.7; }
+  .use-card.dark p { color: rgba(255,255,255,0.5); }
+  .use-examples { margin-top: 1rem; display: flex; flex-direction: column; gap: 0.4rem; }
+  .use-example { font-size: 0.78rem; color: var(--muted-light); padding-left: 0.8rem; border-left: 2px solid var(--border); line-height: 1.5; }
+  .use-card.dark .use-example { color: rgba(255,255,255,0.3); border-color: rgba(255,255,255,0.1); }
+
+  /* WHAT'S INCLUDED */
+  .included-section { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .included-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  .included-card { padding: 2rem 2.5rem; border: 1px solid var(--border); border-radius: 6px; background: var(--white); display: flex; gap: 1.25rem; align-items: flex-start; }
+  .included-num { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--border); line-height: 1; flex-shrink: 0; width: 2rem; }
+  .included-card h3 { font-size: 0.95rem; font-weight: 500; margin-bottom: 0.4rem; color: var(--ink); }
+  .included-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.65; }
+
+  /* HOW IT WORKS */
+  .process-strip { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--border); border-radius: 6px; overflow: hidden; }
+  .process-row { display: grid; grid-template-columns: 72px 1fr; border-bottom: 1px solid var(--border); background: var(--white); }
+  .process-row:last-child { border-bottom: none; }
+  .process-n { padding: 2rem 1.5rem; border-right: 1px solid var(--border); display: flex; align-items: flex-start; justify-content: center; font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--muted-light); padding-top: 2.2rem; }
+  .process-body { padding: 2rem 2.5rem; }
+  .process-body h3 { font-size: 0.95rem; font-weight: 500; margin-bottom: 0.4rem; color: var(--ink); }
+  .process-body p { font-size: 0.85rem; color: var(--muted); line-height: 1.7; }
+
+  /* PRICING */
+  .pricing-note { background: #111210; color: white; padding: 1.75rem 2.5rem; border-radius: 6px; margin-bottom: 2rem; display: flex; gap: 1.25rem; align-items: flex-start; }
+  .pricing-note-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--yellow); margin-top: 6px; flex-shrink: 0; }
+  .pricing-note p { font-size: 0.88rem; color: rgba(255,255,255,0.55); line-height: 1.75; }
+  .pricing-note p strong { color: white; font-weight: 500; }
+  .pricing-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem; }
+  .price-card { border: 1px solid var(--border); border-radius: 6px; padding: 2.5rem 2rem; background: var(--white); transition: box-shadow 0.2s, transform 0.2s; position: relative; }
+  .price-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.07); transform: translateY(-3px); }
+  .price-card.featured { background: #111210; border-color: #111210; color: white; }
+  .price-tag { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted-light); margin-bottom: 1.5rem; }
+  .price-card.featured .price-tag { color: var(--yellow); }
+  .price-amount { font-family: 'Playfair Display', serif; font-size: 2.6rem; line-height: 1; color: var(--ink); margin-bottom: 0.3rem; letter-spacing: -0.02em; }
+  .price-card.featured .price-amount { color: white; }
+  .price-period { font-size: 0.8rem; color: var(--muted-light); margin-bottom: 2rem; font-weight: 300; }
+  .price-card.featured .price-period { color: rgba(255,255,255,0.35); }
+  .price-line { height: 1px; background: var(--border); margin-bottom: 1.75rem; }
+  .price-card.featured .price-line { background: rgba(255,255,255,0.1); }
+  .price-list { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; font-size: 0.85rem; color: var(--muted); }
+  .price-card.featured .price-list { color: rgba(255,255,255,0.55); }
+  .price-list li { display: flex; gap: 0.6rem; align-items: flex-start; line-height: 1.5; }
+  .price-list li::before { content: '–'; color: var(--yellow); flex-shrink: 0; font-weight: 500; }
+  .price-footnote { font-size: 0.82rem; color: var(--muted); text-align: center; padding: 1.25rem; border: 1px solid var(--border); border-radius: 6px; background: var(--surface); }
+  .recommend-badge { position: absolute; top: -1px; left: 50%; transform: translateX(-50%); background: var(--yellow); color: var(--ink); font-size: 0.7rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; padding: 0.3rem 1rem; border-radius: 0 0 6px 6px; white-space: nowrap; }
+
+  /* CTA BAND */
+  .cta-section { background: var(--yellow); padding: 5rem; display: grid; grid-template-columns: 1fr auto; gap: 4rem; align-items: center; }
+  .cta-section h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 3vw, 2.5rem); letter-spacing: -0.02em; color: var(--ink); line-height: 1.15; margin-bottom: 0.75rem; }
+  .cta-section p { font-size: 0.95rem; color: rgba(17,18,16,0.6); max-width: 480px; line-height: 1.7; font-weight: 300; }
+  .cta-actions { display: flex; flex-direction: column; gap: 0.75rem; align-items: flex-end; flex-shrink: 0; }
+  .btn-dark { background: var(--ink); color: var(--paper); padding: 1rem 2.25rem; border-radius: 3px; font-size: 0.9rem; font-weight: 500; text-decoration: none; white-space: nowrap; transition: background 0.2s; letter-spacing: 0.02em; display: inline-block; }
+  .btn-dark:hover { background: #2d2c28; }
+  .cta-email { font-size: 0.95rem; font-weight: 500; background: white; color: var(--ink); padding: 0.85rem 1.75rem; border-radius: 3px; text-decoration: none; border: 1.5px solid rgba(17,18,16,0.15); display: inline-flex; align-items: center; gap: 0.5rem; white-space: nowrap; }
+
+  footer { background: var(--ink); padding: 2rem 5rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+  .footer-logo { font-family: 'Playfair Display', serif; color: rgba(255,255,255,0.6); font-size: 1rem; text-decoration: none; }
+  .footer-links { display: flex; gap: 2rem; list-style: none; }
+  .footer-links a { font-size: 0.78rem; color: rgba(255,255,255,0.3); text-decoration: none; transition: color 0.2s; }
+  .footer-links a:hover { color: rgba(255,255,255,0.7); }
+  .footer-copy { font-size: 0.75rem; color: rgba(255,255,255,0.25); }
+
+  @media (max-width: 1000px) {
+    nav { padding: 1rem 1.5rem; }
+    .hero { padding: 5rem 2rem 4rem; }
+    .section { padding: 4rem 2rem; }
+    .use-cases { grid-template-columns: 1fr; }
+    .included-grid { grid-template-columns: 1fr; }
+    .pricing-row { grid-template-columns: 1fr; }
+    .cta-section { grid-template-columns: 1fr; padding: 4rem 2rem; }
+    .cta-actions { align-items: flex-start; }
+    footer { padding: 1.5rem 2rem; flex-direction: column; text-align: center; }
+    .footer-links { justify-content: center; }
+  }
+</style>
+</head>
+<body>
+
+<nav style="position:relative;">
+  <a class="nav-logo" href="./index.html">CV by Design <span>bespoke AI tools</span></a>
+  <ul class="nav-links">
+    <li><a href="./index.html" style="text-transform:none;letter-spacing:0.01em;color:var(--muted);">For career development</a></li>
+    <li><a href="./coaches-landing.html" style="text-transform:none;letter-spacing:0.01em;color:var(--muted);">For coaches</a></li>
+    <li><a href="mailto:info@jennifersimonds.com" style="color:var(--ink);border:1px solid var(--border);padding:0.4rem 0.85rem;border-radius:3px;letter-spacing:0.01em;text-transform:none;font-size:0.78rem;white-space:nowrap;">✉ info@jennifersimonds.com</a></li>
+    <li><a href="mailto:info@jennifersimonds.com" class="nav-cta">Get in touch →</a></li>
+    <li><button class="hamburger" onclick="document.getElementById('mobile-nav-ai').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button></li>
+  </ul>
+  <div class="mobile-menu" id="mobile-nav-ai">
+    <a href="#usecases">Who it's for</a>
+    <a href="#included">What's included</a>
+    <a href="#pricing">Pricing</a>
+    <a href="./index.html">For career development</a>
+    <a href="./coaches-landing.html">For coaches</a>
+    <a href="mailto:info@jennifersimonds.com">✉ info@jennifersimonds.com</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+    <p class="hero-kicker">Bespoke AI Tools · Business & Personal</p>
+    <h1 class="hero-title">
+      AI tools built<br>around <em>your work,</em><br>not the other way around.
+    </h1>
+    <p class="hero-body">
+      Whether you're building a business, running one, or need smarter personal workflows —
+      I design, build, and maintain AI tools tailored specifically to how you work.
+      Paired with coaching so they actually get used.
+    </p>
+    <div class="hero-actions">
+      <a href="mailto:info@jennifersimonds.com" class="btn-yellow">Start a conversation →</a>
+      <a href="#usecases" class="btn-ghost-light">See what's possible</a>
+    </div>
+  </div>
+</section>
+
+<!-- USE CASES -->
+<section class="section" id="usecases">
+  <p class="section-kicker">Who this is for</p>
+  <h2 class="section-title">For anyone who needs a tool that fits their actual work</h2>
+  <div class="use-cases">
+    <div class="use-card">
+      <div class="use-icon">◎</div>
+      <h3>Building a business</h3>
+      <p>You're in early stages and need to move fast — but you're spending too much time on things that could be automated or structured better. A bespoke AI tool frees you to focus on what matters.</p>
+      <div class="use-examples">
+        <div class="use-example">Proposal and pitch generation</div>
+        <div class="use-example">Client intake and onboarding flows</div>
+        <div class="use-example">Content and communication tools</div>
+      </div>
+    </div>
+    <div class="use-card">
+      <div class="use-icon">→</div>
+      <h3>Running a business</h3>
+      <p>You have repeating processes that eat time. You want consistency across your team or outputs. A tool built to your specific workflow means less friction and better results, reliably.</p>
+      <div class="use-examples">
+        <div class="use-example">Internal process and documentation tools</div>
+        <div class="use-example">Team briefing and reporting assistants</div>
+        <div class="use-example">Customer-facing AI-powered interfaces</div>
+      </div>
+    </div>
+    <div class="use-card dark">
+      <div class="use-icon">✦</div>
+      <h3>Personal professional tools</h3>
+      <p>You want something built around how you specifically think and work — not a generic app. A personal AI assistant trained on your context, your voice, your needs.</p>
+      <div class="use-examples">
+        <div class="use-example">Personal knowledge and writing tools</div>
+        <div class="use-example">Decision-support and planning tools</div>
+        <div class="use-example">Research and synthesis assistants</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT'S INCLUDED -->
+<section class="section included-section" id="included">
+  <p class="section-kicker">What's included</p>
+  <h2 class="section-title">A complete service — not just a tool handed over and forgotten</h2>
+  <div class="included-grid">
+    <div class="included-card">
+      <div class="included-num">01</div>
+      <div>
+        <h3>Discovery and scoping</h3>
+        <p>We start by understanding how you actually work — your processes, bottlenecks, and goals. This shapes what gets built and ensures the tool solves a real problem, not an assumed one.</p>
+      </div>
+    </div>
+    <div class="included-card">
+      <div class="included-num">02</div>
+      <div>
+        <h3>Bespoke tool design and build</h3>
+        <p>I design and build the AI tool around your specific needs — configured to your workflow, your language, and your outputs. Not a template. Not a plugin. Something that fits.</p>
+      </div>
+    </div>
+    <div class="included-card">
+      <div class="included-num">03</div>
+      <div>
+        <h3>Coaching on how to use it well</h3>
+        <p>AI tools only deliver value when people know how to direct them. Coaching is included so you get the most from what's been built — and can adapt it as your work evolves.</p>
+      </div>
+    </div>
+    <div class="included-card">
+      <div class="included-num">04</div>
+      <div>
+        <h3>Ongoing maintenance and iteration</h3>
+        <p>The tool evolves as your needs do. I maintain it, update it when the underlying AI changes, and refine it based on how it's actually being used. You don't have to manage it yourself.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section">
+  <p class="section-kicker">How it works</p>
+  <h2 class="section-title">A straightforward process from first conversation to working tool</h2>
+  <div class="process-strip">
+    <div class="process-row">
+      <div class="process-n">01</div>
+      <div class="process-body">
+        <h3>Initial conversation</h3>
+        <p>Tell me what you're trying to solve. We'll talk through your work, your pain points, and what a useful tool would actually look like. No commitment at this stage — just clarity.</p>
+      </div>
+    </div>
+    <div class="process-row">
+      <div class="process-n">02</div>
+      <div class="process-body">
+        <h3>Scoping and proposal</h3>
+        <p>I put together a clear proposal — what I'll build, how long it will take, and what it will cost. Transparent and specific, so you know exactly what you're agreeing to.</p>
+      </div>
+    </div>
+    <div class="process-row">
+      <div class="process-n">03</div>
+      <div class="process-body">
+        <h3>Build and iterate together</h3>
+        <p>I build the tool in stages, with your input throughout. You test it with real work. We refine until it genuinely fits how you operate.</p>
+      </div>
+    </div>
+    <div class="process-row">
+      <div class="process-n">04</div>
+      <div class="process-body">
+        <h3>Handover, coaching and ongoing support</h3>
+        <p>You get the tool, the coaching to use it well, and ongoing support to keep it working as your needs change. It doesn't end at delivery.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section" style="background:var(--surface);border-top:1px solid var(--border);" id="pricing">
+  <p class="section-kicker">Pricing</p>
+  <h2 class="section-title">Priced as a project, not a subscription</h2>
+
+  <div class="pricing-note">
+    <div class="pricing-note-dot"></div>
+    <p>
+      <strong>This is more involved than the CV tool — and priced accordingly.</strong>
+      Building, maintaining, and coaching around a bespoke AI tool takes real time and expertise.
+      Costs depend on complexity, scope, and ongoing needs. The prices below are starting points —
+      every engagement is quoted specifically after an initial conversation.
+    </p>
+  </div>
+
+  <div class="pricing-row">
+    <div class="price-card">
+      <p class="price-tag">Scoping & discovery</p>
+      <div class="price-amount">€350</div>
+      <p class="price-period">one-time · credited to project</p>
+      <div class="price-line"></div>
+      <ul class="price-list">
+        <li>2–3 hour deep-dive session</li>
+        <li>Process and workflow mapping</li>
+        <li>Clear written proposal and spec</li>
+        <li>Cost estimate for full build</li>
+        <li>Credited if you proceed</li>
+      </ul>
+    </div>
+
+    <div class="price-card featured">
+      <div class="recommend-badge">Most popular</div>
+      <p class="price-tag" style="margin-top:1.25rem;">Full build + coaching</p>
+      <div class="price-amount">From €1,200</div>
+      <p class="price-period">project fee · scope-dependent</p>
+      <div class="price-line"></div>
+      <ul class="price-list">
+        <li>Bespoke AI tool designed and built</li>
+        <li>Coaching sessions included</li>
+        <li>Testing and iteration rounds</li>
+        <li>Documentation and handover</li>
+        <li>One month support included</li>
+      </ul>
+    </div>
+
+    <div class="price-card">
+      <p class="price-tag">Ongoing support & maintenance</p>
+      <div class="price-amount">€150</div>
+      <p class="price-period">per month · after handover</p>
+      <div class="price-line"></div>
+      <ul class="price-list">
+        <li>Tool maintenance and updates</li>
+        <li>Adaptations as your needs change</li>
+        <li>Monthly check-in session</li>
+        <li>Priority response on issues</li>
+        <li>Can be paused and resumed</li>
+      </ul>
+    </div>
+  </div>
+  <p class="price-footnote">All prices are starting points and depend on scope. Every project is quoted individually after the initial conversation. Hourly coaching is available separately at €80/hr.</p>
+</section>
+
+<!-- CTA -->
+<div class="cta-section">
+  <div>
+    <h2>Not sure what you need yet? That's fine.</h2>
+    <p>The first conversation is just that — a conversation. Tell me what you're working on and we'll figure out together whether a bespoke AI tool makes sense for you.</p>
+  </div>
+  <div class="cta-actions">
+    <a href="mailto:info@jennifersimonds.com" class="btn-dark">Get in touch →</a>
+    <a href="mailto:info@jennifersimonds.com" class="cta-email">✉ info@jennifersimonds.com</a>
+  </div>
+</div>
+
+<footer>
+  <a class="footer-logo" href="./index.html">CV by Design</a>
+  <ul class="footer-links">
+    <li><a href="./index.html">Career development</a></li>
+    <li><a href="./coaches-landing.html">For coaches</a></li>
+    <li><a href="./ai-tools.html">Bespoke AI</a></li>
+    <li><a href="./imprint.html">Imprint</a></li>
+    <li><a href="mailto:info@jennifersimonds.com">Contact</a></li>
+  </ul>
+  <span class="footer-copy">© 2026 Jennifer Simonds · Berlin</span>
+</footer>
+
+</body>
+</html>

@@ -43,21 +43,33 @@
     font-family: 'Playfair Display', serif;
     font-size: 1.15rem; color: var(--ink); text-decoration: none; letter-spacing: -0.01em;
   }
-  .nav-logo span { color: var(--muted-light); font-weight: 300; font-size: 0.9rem; margin-left: 0.5rem; }
-  .nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
+  .nav-logo span {
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.88rem; font-weight: 300; color: var(--muted-light);
+    margin-left: 0.4rem; letter-spacing: 0;
+  }
+  .nav-links { display: flex; gap: 1.5rem; list-style: none; align-items: center; }
   .nav-links a {
-    font-size: 0.82rem; color: var(--muted); text-decoration: none;
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.78rem; color: var(--muted); text-decoration: none;
     font-weight: 400; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s;
   }
   .nav-links a:hover { color: var(--ink); }
   .nav-cta {
-    background: var(--cyan) !important; color: var(--ink) !important;
-    padding: 0.55rem 1.4rem; border-radius: 3px; font-weight: 500 !important;
-    letter-spacing: 0.02em !important; text-transform: none !important; transition: background 0.2s !important;
+    background: var(--ink) !important; color: var(--paper) !important;
+    padding: 0.5rem 1.1rem; border-radius: 3px; font-weight: 500 !important;
+    letter-spacing: 0.02em !important; text-transform: none !important;
+    font-size: 0.78rem !important; transition: background 0.2s !important; white-space: nowrap;
   }
-  .nav-cta:hover { background: var(--pink) !important; color: white !important; }
-
-  /* HERO — full dark, editorial */
+  .nav-cta:hover { background: var(--pink) !important; }
+  .nav-hide { }
+  @media (max-width: 860px) { .nav-hide { display: none !important; } }
+  .hamburger { display: flex; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+  .hamburger span { display: block; width: 22px; height: 2px; background: var(--ink); border-radius: 2px; }
+  .mobile-menu { position: absolute; top: 100%; left: 0; right: 0; background: var(--paper); border-bottom: 1px solid var(--border); padding: 0.5rem 2rem 1rem; flex-direction: column; z-index: 200; display: none; }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a { font-family: 'Instrument Sans', sans-serif; font-size: 0.88rem; color: var(--muted); text-decoration: none; padding: 0.85rem 0; border-bottom: 1px solid var(--border); font-weight: 400; text-transform: uppercase; letter-spacing: 0.04em; }
+  .mobile-menu a:last-child { border-bottom: none; }
   .hero {
     background: var(--deep);
     min-height: 80vh;
@@ -321,9 +333,46 @@
   .footer-copy { font-size: 0.75rem; color: rgba(255,255,255,0.25); }
 
   @media (max-width: 1000px) {
-    nav { padding: 1rem 1.5rem; }
-    .nav-links li:not(:last-child) { display: none; }
-    .hero { grid-template-columns: 1fr; min-height: auto; }
+    nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(247,245,240,0.95);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    padding: 1.1rem 3rem;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem; color: var(--ink); text-decoration: none; letter-spacing: -0.01em;
+  }
+  .nav-logo span {
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.88rem; font-weight: 300; color: var(--muted-light);
+    margin-left: 0.4rem; letter-spacing: 0;
+  }
+  .nav-links { display: flex; gap: 1.5rem; list-style: none; align-items: center; }
+  .nav-links a {
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.78rem; color: var(--muted); text-decoration: none;
+    font-weight: 400; letter-spacing: 0.04em; text-transform: uppercase; transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--ink); }
+  .nav-cta {
+    background: var(--ink) !important; color: var(--paper) !important;
+    padding: 0.5rem 1.1rem; border-radius: 3px; font-weight: 500 !important;
+    letter-spacing: 0.02em !important; text-transform: none !important;
+    font-size: 0.78rem !important; transition: background 0.2s !important; white-space: nowrap;
+  }
+  .nav-cta:hover { background: var(--pink) !important; }
+  .nav-hide { }
+  @media (max-width: 860px) { .nav-hide { display: none !important; } }
+  .hamburger { display: flex; flex-direction: column; gap: 5px; cursor: pointer; background: none; border: none; padding: 4px; }
+  .hamburger span { display: block; width: 22px; height: 2px; background: var(--ink); border-radius: 2px; }
+  .mobile-menu { position: absolute; top: 100%; left: 0; right: 0; background: var(--paper); border-bottom: 1px solid var(--border); padding: 0.5rem 2rem 1rem; flex-direction: column; z-index: 200; display: none; }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a { font-family: 'Instrument Sans', sans-serif; font-size: 0.88rem; color: var(--muted); text-decoration: none; padding: 0.85rem 0; border-bottom: 1px solid var(--border); font-weight: 400; text-transform: uppercase; letter-spacing: 0.04em; }
+  .mobile-menu a:last-child { border-bottom: none; }
+  .hero { grid-template-columns: 1fr; min-height: auto; }
     .hero-left { padding: 4rem 2rem; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.08); }
     .hero-right { padding: 3rem 2rem; }
     .section { padding: 4rem 2rem; }
@@ -351,12 +400,9 @@
 <body>
 
 <nav style="position:relative;">
-  <a class="nav-logo" href="#">CV by Design <span>for Coaches</span></a>
+  <a class="nav-logo" href="./index.html">CV by Design <span>for Coaches</span></a>
   <ul class="nav-links">
-    <li class="nav-hide"><a href="#offer">What you get</a></li>
-    <li class="nav-hide"><a href="#how">How it works</a></li>
-    <li class="nav-hide"><a href="#pricing">Pricing</a></li>
-    <li><a href="./index.html" style="color:var(--cyan);font-weight:500;text-transform:none;letter-spacing:0.01em;">For job seekers</a></li>
+    <li><a href="./index.html" style="color:var(--muted);font-weight:400;text-transform:none;letter-spacing:0.01em;font-size:0.78rem;">For career development</a></li>
     <li><a href="mailto:info@jennifersimonds.com" style="color:var(--ink);border:1px solid var(--border);padding:0.4rem 0.85rem;border-radius:3px;letter-spacing:0.01em;text-transform:none;font-size:0.78rem;white-space:nowrap;">✉ info@jennifersimonds.com</a></li>
     <li><a href="mailto:info@jennifersimonds.com" class="nav-cta">Get in touch →</a></li>
     <li><button class="hamburger" onclick="document.getElementById('mobile-nav-coaches').classList.toggle('open')" aria-label="Menu"><span></span><span></span><span></span></button></li>
@@ -366,7 +412,9 @@
     <a href="#how" onclick="document.getElementById('mobile-nav-coaches').classList.remove('open')">How it works</a>
     <a href="#pricing" onclick="document.getElementById('mobile-nav-coaches').classList.remove('open')">Pricing</a>
     <a href="#about" onclick="document.getElementById('mobile-nav-coaches').classList.remove('open')">About</a>
+    <a href="./ai-tools.html">AI Tools by Design</a>
     <a href="./index.html">For job seekers</a>
+    <a href="./ai-tools.html">Bespoke AI tools</a>
     <a href="mailto:info@jennifersimonds.com">✉ info@jennifersimonds.com</a>
   </div>
 </nav>
@@ -611,8 +659,10 @@
   <a class="footer-logo" href="#">CV by Design · For Coaches</a>
   <ul class="footer-links">
     <li><a href="https://jennifersimonds.com" target="_blank">Portfolio</a></li>
-    <li><a href="./index.html">For job seekers</a></li>
+    <li><a href="./ai-tools.html">AI Tools by Design</a>
+    <a href="./index.html">For job seekers</a></li>
     <li><a href="mailto:info@jennifersimonds.com">Contact</a></li>
+    <li><a href="./ai-tools.html">Bespoke AI</a></li>
     <li><a href="./imprint.html">Imprint</a></li>
   </ul>
   <span class="footer-copy">© 2026 Jennifer Simonds · Berlin</span>
